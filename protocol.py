@@ -11,7 +11,7 @@ def harvest_from_twilio(input):
     }
 
 weather_conditions = ["sunny","partly_cloudy","cloudy","rain","windy"]
-hive_states = ["notinuse","notoccupied","occipied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood", "justdead"]
+hive_states = ["notinuse","notoccupied","occupied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood", "justdead"]
 colony_strength = ["strong","moderate","weak","critical"]
 temper_of_hives = ["calm","nervous","angry"]
 comb_conditions = ["high","average","low"]
@@ -65,4 +65,8 @@ def inspection_from_twilio(input):
         "varrao_mites": elements[13].strip().lower(),
         "clothing_tools_condition": elements[14].strip().lower()
     }
+
+# print inspection_from_twilio("2 | 10/10/10 | windy| occupied | strong | calm | yes | high | high | light | light | no | no |good |good")
+
+# test_string = "2 | 10/10/10 | sunny | occupied | strong | calm | yes | high | high | light | light | no | no |good |good"
 

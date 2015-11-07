@@ -1,7 +1,9 @@
 from flask import Flask, request, redirect, jsonify, render_template, g
 import twilio.twiml
 import rethinkdb as r
+import json
 import os
+import protocol
 from rethinkdb.errors import RqlRuntimeError
 
 app = Flask(__name__)
@@ -46,14 +48,20 @@ def hello():
 def twilio_response():
     try:
         phone_number = request.values.get('From')
-        message_body = request.values.get('Body')
-
-        r.table('hives').insert({"dank":"memes"}).run(g.rdb_conn);
-
-        response = "YOLO: {}".format(message_body)
+        endpoint, message_body = request.values.get('Body').split('|', 1)
 
         resp = twilio.twiml.Response()
-        resp.message(response)
+
+        if endpoint.strip() == "add_inspection":
+            try:
+                insp_dict = protocol.inspection_from_twilio(message_body)
+                r.table('inspections').insert(insp_dict).run(g.rdb_conn)
+            except Exception, ex:
+                resp.message(str(ex))
+            resp.message(json.dumps(insp_dict))
+        else:
+            resp.message("Error: Unable to identify endpoint, {}".format(endpoint))
+
         return str(resp)
     except Exception as e:
         resp = twilio.twiml.Response()
