@@ -44,8 +44,8 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_VARRAO_MITES = "varrao mites";
     private static final String DATA_KEY_SAFARI_ANTS = "safari ants";
     private static final String DATA_KEY_CHALK_BROOD = "chalk brood";
-
-
+    private static final String DATA_KEY_HIVE_CONDITION = "hive condition";
+    private static final String DATA_KEY_CLOTHING_CONDITION= "clothing tools condition";
 
     @Override
     protected List<Step> getSteps(Context context){
@@ -240,6 +240,8 @@ public class InspectionForm extends SingleInputFormActivity {
                         R.string.chalk_brood_description
                 )
         );
+
+        
 
         steps.add(
                 new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
