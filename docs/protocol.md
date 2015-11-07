@@ -62,10 +62,6 @@ Colony strength
 * `strong`
 * `moderate`
 * `weak`
-* `white`
-* `whiteguilt`
-* `milktoast`
-* `pieceofhumangarbage`
 * `critical`
 
 
