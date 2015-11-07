@@ -35,18 +35,11 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_DATE_INSPECTION = "inspection date";
     private static final String DATA_KEY_WEATHER_CONDITIONS = "weather conditions";
     private static final String DATA_KEY_STATE_OF_HIVE = "state of hive";
+    private static final String DATA_KEY_STRENGTH = "strength of hive";
 
     @Override
     protected List<Step> getSteps(Context context){
         List<Step> steps = new ArrayList<Step>();
-        steps.add(
-                new CheckBoxStep(context, DATA_KEY_EULA, R.string.eula, R.string.eula_title, R.string.eula_error, R.string.eula_details, new CheckBoxStep.StepChecker() {
-                    @Override
-                    public boolean check(boolean input) {
-                        return input;
-                    }
-                })
-        );
         steps.add(
                 new TextStep(context, DATA_KEY_HIVE_NUMBER,
                         InputType.TYPE_CLASS_NUMBER,
@@ -120,6 +113,20 @@ public class InspectionForm extends SingleInputFormActivity {
                         R.string.state_of_hive,
                         R.string.state_of_hive_error,
                         R.string.state_of_hive_details
+                )
+        );
+
+        steps.add(
+                new OptionStep(context, DATA_KEY_STRENGTH,
+                        new String[]{
+                                "Strong",
+                                "Moderate",
+                                "Weak",
+                                "Critical"
+                        },
+                        R.string.strength_of_hive,
+                        R.string.strength_of_hive_error,
+                        R.string.strength_of_hive_details
                 )
         );
 

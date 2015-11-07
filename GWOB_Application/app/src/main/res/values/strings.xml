@@ -80,6 +80,10 @@
     <string name="state_of_hive_error">Please chose one of the suggested options.</string>
     <string name="state_of_hive_details">Please select one of the suggested options.</string>
 
+    <string name="strength_of_hive">Strength of Hive</string>
+    <string name="strength_of_hive_error">Please chose one of the suggested options.</string>
+    <string name="strength_of_hive_details">Please chose the strength of the hive.</string>
+
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
