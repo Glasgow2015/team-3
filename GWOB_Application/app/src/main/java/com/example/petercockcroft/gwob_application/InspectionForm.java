@@ -166,6 +166,19 @@ public class InspectionForm extends SingleInputFormActivity {
                 )
         );
 
+        steps.add(
+                new OptionStep(context, DATA_KEY_POLLEN_STORES,
+                        new String[]{
+                                "High",
+                                "Average",
+                                "Low"
+                        },
+                        R.string.pollen_stores,
+                        R.string.pollen_stores_error,
+                        R.string.pollen_stores_details
+                )
+        );
+
 
 
         steps.add(
