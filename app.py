@@ -1,10 +1,39 @@
 from flask import Flask, request, redirect, jsonify, render_template, g
+from wtforms import Form, TextField, FloatField, SelectMultipleField, validators
 import twilio.twiml
 import rethinkdb as r
 import json
 import os
 import protocol
 from rethinkdb.errors import RqlRuntimeError
+
+# Forms
+class NewApiaryForm(Form):
+    name = TextField('Name', [validators.Required()])
+    lat = FloatField('Latitude', [validators.Required()])
+    lon = FloatField('Longitude', [validators.Required()])
+    environment = SelectMultipleField('Environment (within 3 kilometers)', choices=[ \
+        ('water','Water Supply'), \
+        ('miombo_woodlands','Miombo Woodlands'), \
+        ('closed_forests','Closed Forests'), \
+        ('grassland','Grassland'), \
+        ('forest_plantation','Forest Plantation'), \
+        ('sisal_plantation','Sisal Plantation'), \
+        ('orchard','Mixed Crops'), \
+        ('pesticides','Farmers with Pesticides'), \
+    ])
+    accessibility = SelectMultipleField('Accessibility of Apiary', choices=[ \
+        ('vehicle','By Vehicle'), \
+        ('cycle','Bycicle or Motorcycle'), \
+        ('foot','By Foot'), \
+    ])
+    apiaryType = SelectMultipleField('Type', choices=[ \
+        ('natural_nest','Natural Nest'), \
+        ('tree','Tree'), \
+        ('breast_height','Breast Height'), \
+        ('bee_house','Bee Height'), \
+        ('honey_badger_stand','Honey Badger Stand'), \
+    ])
 
 app = Flask(__name__)
 DB = "dbase"
@@ -45,10 +74,11 @@ def hello():
 
 @app.route('/new_apiary', methods=["GET", "POST"])
 def new_apiary():
-    if request.method == "GET":
-        return render_template("new_apiary.html") 
-    else:
-        return render_template("new_apiary.html", alert="Hive Created!")
+    form = NewApiaryForm(request.form)
+    if request.method == "POST" and form.validate():
+        flash('Apiary Created')
+        return render_template("new_apiary.html", form=form) 
+    return render_template("new_apiary.html", alert="LOL", form=form)
 
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():

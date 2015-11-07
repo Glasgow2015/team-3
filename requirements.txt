@@ -4,3 +4,5 @@ Werkzeug==0.8.3
 gunicorn==0.17.2
 twilio>=3.3.6
 rethinkdb==2.1.0.post1
+Flask-WTF==0.12
+WTForms==2.0.2

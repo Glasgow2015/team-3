@@ -1,38 +1,24 @@
-<form>
-<br>Name:<br>
-<input type="text" name="name">
-<br>
+{% macro render_field(field) %}
+  <dt>{{ field.label }}
+  <dd>{{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}
 
-
-<br>GPS Location:<br>
-<input type="text" name="lat">
-<input type="text" name="long">
-
-
-<br>Start Year:<br>
-<input type="text" name="year">
-
-
-<br>Environment (within 3 kilometres)<br>
-<input type="checkbox" name="environment[]" value="water"/> Water Supply<br/>
-<input type="checkbox" name="environment[]" value="miombo_woodlands"/>Miombo Woodlands<br/>
-<input type="checkbox" name="environment[]" value="closed_forests"/>Closed Forests<br/>
-<input type="checkbox" name="environment[]" value="grassland"/>Grassland<br/>
-<input type="checkbox" name="environment[]" value="forest_plantation"/>Forest Plantation<br/>
-<input type="checkbox" name="environment[]" value="sisal_plantation"/>Sisal Plantation<br/>
-<input type="checkbox" name="environment[]" value="orchard"/>Orchard<br/>
-<input type="checkbox" name="environment[]" value="mixed_crops"/>Mixed Crops<br/>
-<input type="checkbox" name="environment[]" value="pesticides"/>Farmers with Pesticides<br/>
-
-<br>Accessibility of Apiary<br>
-<input type="checkbox" name="accessibility[]" value="vehicle"/>By Vehicle<br/>
-<input type="checkbox" name="accessibility[]" value="cycle"/>Bycicle or Motorcycle<br/>
-<input type="checkbox" name="accessibility[]" value="foot"/>By Foot<br/>
-
-<br>Type<br>
-<input type="checkbox" name="type[]" value="natural_nest"/>Natural Nest<br/>
-<input type="checkbox" name="type[]" value="tree"/>Tree<br/>
-<input type="checkbox" name="type[]" value="breast_height"/>Breast Height<br/>
-<input type="checkbox" name="type[]" value="bee_house"/>Bee House<br/>
-<input type="checkbox" name="type[]" value="honey_badger_stand"/>Honey Badger Stand<br/>
-</form> 
+<form method=post>
+  <dl>
+    {{ render_field(form.name) }}
+    {{ render_field(form.lat) }}
+    {{ render_field(form.lon) }}
+    {{ render_field(form.environment) }}
+    {{ render_field(form.accessibility) }}
+    {{ render_field(form.apiaryType) }}
+  </dl>
+  <p><input type=submit value=Register>
+</form>
