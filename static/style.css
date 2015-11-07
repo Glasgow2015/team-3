@@ -1,0 +1,124 @@
+.login-box {
+  width: 300px;
+  margin: 100px auto;
+}
+
+.login-box legend {
+  font-size:26px;
+  text-align:center;
+  font-weight:300;
+}
+
+.well.login-box label {
+  font-size:16px;
+
+}
+
+.list-item {
+  padding: 10px;
+  /*border-radius: 10px;*/
+  margin-bottom: 10px;
+}
+
+.heading {
+    padding-bottom: 70px;
+    margin-bottom: 0px;
+}
+
+.actions {
+  float:right;
+}
+
+.apiary {
+  margin: 15px;
+}
+
+/* TIMELINE */
+
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+.timeline:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    background-color: #eeeeee;
+    left: 50px;
+    margin-left: -1.5px;
+}
+.timeline > li {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+
+.timeline > li:after {
+    clear: both;
+}
+
+.timeline > li > .timeline-panel {
+  width: qauto;
+  float: left;
+  border: 1px solid #d4d4d4;
+  border-radius: 2px;
+  padding: 20px;
+  position: relative;
+  /*box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);*/
+  margin-left: 120px;
+}
+
+.timeline > li > .timeline-panel:before {
+  position: absolute;
+  top: 26px;
+  left: -15px;
+  display: inline-block;
+  border-top: 15px solid transparent;
+  border-right: 15px solid #ccc;
+  border-bottom: 15px solid transparent;
+  content: " ";
+}
+
+.timeline > li > .timeline-panel:after {
+  position: absolute;
+  top: 27px;
+  left: -14px;
+  display: inline-block;
+  border-top: 14px solid transparent;
+  border-right: 14px solid #fff;
+  border-bottom: 14px solid transparent;
+  content: " ";
+}
+
+.timeline > li > .timeline-badge {
+  color: #fff;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 1.4em;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  left: 50px;
+  margin-left: -40px;
+  background-color: #999999;
+  z-index: 100;
+  border-radius: 50%;
+}
+
+.timeline > li > .timeline-badge.ok {
+  background-color: rgb(67, 172, 76);
+}
+
+.timeline > li > .timeline-badge.bad {
+  background-color: rgb(240, 65, 36);
+}
