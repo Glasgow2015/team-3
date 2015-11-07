@@ -1,6 +1,5 @@
 def harvest_from_twilio(input):
     elements = input.split('|')
-
     return {
         "harvest_date": elements[0].strip(),
         "quantity": int(elements[1].strip()),
@@ -43,7 +42,7 @@ def inspection_from_twilio(input):
         raise Exception("varrao_mites ({}) not valid".format(elements[10].strip().lower()))
 
     if elements[13].strip().lower() not in hive_or_clothing_conditions:
-        raise Exception("varrao_mites ({}) not valid".format(elements[13].strip().lower()))
+        raise Exception("hive_condition ({}) not valid".format(elements[13].strip().lower()))
 
     if elements[14].strip().lower() not in hive_or_clothing_conditions:
         raise Exception("clothing_tools_condition ({}) not valid".format(elements[14].strip().lower()))
@@ -62,11 +61,40 @@ def inspection_from_twilio(input):
         "varrao_mites": elements[10].strip().lower(),
         "safari_ants": elements[11].strip().lower() == "yes",
         "chalk_brood": elements[12].strip().lower() == "yes",
-        "varrao_mites": elements[13].strip().lower(),
+        "hive_condition": elements[13].strip().lower(),
         "clothing_tools_condition": elements[14].strip().lower()
     }
+def harvest_to_twilio (input):
+    return "{}|{}|{}|{}|{}|{}".format(
+        input["harvest_date"], \
+        input["quantity"], \
+        "YES" if input["beekeeper_clothing"] else "NO", \
+        "YES" if input["assistant_clothing"] else "NO", \
+        "YES" if input["smoker_available"] else "NO", \
+        input["clean_airtight_buckets_available_number"]
+        )
 
-# print inspection_from_twilio("2 | 10/10/10 | windy| occupied | strong | calm | yes | high | high | light | light | no | no |good |good")
+def inspection_to_twilio (input):
+    return "{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}".format(
+        input["hive"], \
+        input["inspection_date"], \
+        input["weather_condition"], \
+        input["hive_state"], \
+        input["colony_strength"], \
+        input["hive_temper"], \
+        "YES" if input["queen"] else "NO", \
+        input["honey_store_condition"], \
+        input["pollen_store_condition"], \
+        input["small_hive_beetle"], \
+        input["varrao_mites"], \
+        "YES" if input["safari_ants"] else "NO", \
+        "YES" if input["chalk_brood"] else "NO", \
+        input["hive_condition"], \
+        input["clothing_tools_condition"]
+    )
 
-# test_string = "2 | 10/10/10 | sunny | occupied | strong | calm | yes | high | high | light | light | no | no |good |good"
+# print inspection_to_twilio(inspection_from_twilio("2 | 10/10/10 | windy| occupied | strong | calm | yes | high | high | light | light | no | no |good |good"))
+
+# print harvest_to_twilio(harvest_from_twilio("10/10/15|2|yes|no|yes|8"))
+
 
