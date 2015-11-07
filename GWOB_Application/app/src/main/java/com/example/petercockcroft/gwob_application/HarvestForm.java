@@ -22,24 +22,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class HarvestForm extends SingleInputFormActivity {
-
-    private static final String DATA_KEY_HEIGHT = "height";
-    private static final String DATA_KEY_EULA = "eula";
-    private static final String DATA_KEY_EMAIL = "email";
-    private static final String DATA_KEY_PASSWORD = "password";
-    private static final String DATA_KEY_BIRTHDAY = "birthday";
-    private static final String DATA_KEY_CITY = "city";
-
-
     private static final String DATA_KEY_DATE = "date";
     private static final String DATA_KEY_RIPE_COMBS = "combs";
     private static final String DATA_KEY_CLOTH_BEE = "cloth_beekeeper";
     private static final String DATA_KEY_CLOTH_ASSIST = "cloth_assistents";
     private static final String DATA_KEY_SMOKER = "smoker";
     private static final String DATA_KEY_BUCKETS = "buckets";
-
-
-
 
     @Override
     protected List<Step> getSteps(Context context) {
