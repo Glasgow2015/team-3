@@ -39,18 +39,18 @@
 
     <!-- HARVEST strings. -->
     <string name="harvest_date_title">Date of Harvest</string>
-    <string name="harvest_date_error">Don't enter a future date.</string>
+    <string name="harvest_date_error">Don\'t enter a future date.</string>
     <string name="harvest_date_detail">The date of the harvest. This cannot be a date in the future.</string>
 
     <string name="harvest_quant_title">Combs Harvested</string>
     <string name="harvest_quant_error">Enter a positive number</string>
     <string name="harvest_quant_detail">The number of ripe combs harvested.</string>
 
-    <string name="harvest_cloth_bee_title">Beekeeper's Clothing</string>
+    <string name="harvest_cloth_bee_title">Beekeeper\'s Clothing</string>
     <string name="harvest_cloth_bee_error">Select "Yes" or "No"</string>
     <string name="harvest_cloth_bee_detail">Was there protective clothing available for the beekeeper?</string>
 
-    <string name="harvest_cloth_assist_title">Assistants' Clothing</string>
+    <string name="harvest_cloth_assist_title">Assistants\' Clothing</string>
     <string name="harvest_cloth_assist_error">Please select "Yes" or "No"</string>
     <string name="harvest_cloth_assist_detail">Was there protective clothing available for the assistants?</string>
 
@@ -71,5 +71,8 @@
     <string name="inspection_date_error_future">Date cannot be in the future.</string>
     <string name="inspection_date_details">Please enter the date of the inspection (cannot be in the future).</string>
 
+    <!-- MISCELLANEOUS -->
+    <string name="boolean_positive">Yes</string>
+    <string name="boolean_negative">No</string>
 
 </resources>
