@@ -15,7 +15,7 @@ The maximum size of a message is 1600 characters
 
 ```
 
-hive_number|inspection_date|weather_condition|hive_state|hive_type
+hive (number) | inspection (date) | weather_condition | hive_state | colony_strength | hive_temper | queen (y/n) | honeystore_condition | pollenstore_condition | smallhive_beetle | varrao_mites | safari_ants (y/n) | chalk_brood (y/n) | hive_condition | clothing_tools_condition
 
 ```
 
@@ -79,12 +79,22 @@ Small hive beetle
 * `heavy`
 
 
+Varrao Mites
+* `light`
+* `moderate`
+* `heavy`
 
 
+Hive condition
+* `good`
+* `fair`
+* `poor`
+* `damaged`
 
 
-
-
-
-
+Clothing/Tools condition
+* `good`
+* `fair`
+* `poor`
+* `damaged`
 
