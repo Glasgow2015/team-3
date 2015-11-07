@@ -270,45 +270,6 @@ public class InspectionForm extends SingleInputFormActivity {
                 )
         );
 
-        steps.add(
-                new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
-                    @Override
-                    public boolean check(String input) {
-                        return android.util.Patterns.EMAIL_ADDRESS.matcher(input).matches();
-                    }
-                })
-        );
-        steps.add(
-                new TextStep(context, DATA_KEY_PASSWORD, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, R.string.password, R.string.password_error, R.string.password_details, new TextStep.StepChecker() {
-                    @Override
-                    public boolean check(String input) {
-                        return input.length() >= 5;
-                    }
-                })
-        );
-        steps.add(
-                new DateStep(context, DATA_KEY_BIRTHDAY, R.string.birthday, R.string.birthday_error, R.string.birthday_details, new DateStep.StepChecker(){
-                    @Override
-                    public boolean check(int year, int month, int day){
-                        Calendar today = new GregorianCalendar();
-                        Calendar birthday = new GregorianCalendar(year, month, day);
-                        today.add(Calendar.YEAR, -14);
-                        return today.after(birthday);
-                    }
-                })
-        );
-        steps.add(
-                new SeekBarStep(context, DATA_KEY_HEIGHT, 150, 180, R.string.height, R.string.height_error, R.string.height_details, new SeekBarStep.StepChecker() {
-                    @Override
-                    public boolean check(int progress) {
-                        return progress >= 160;
-                    }
-                })
-        );
-        steps.add(
-                new TextStep(context, DATA_KEY_CITY, InputType.TYPE_CLASS_TEXT, R.string.city, R.string.city_error, R.string.city_details)
-        );
-
         return steps;
     }
 
