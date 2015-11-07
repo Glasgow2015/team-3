@@ -11,11 +11,25 @@ Yes/No answers are signified by one character: `y` or `n`
 
 The maximum size of a message is 1600 characters
 
+
+## Create Harvest
+
+```
+
+harvestdate (date) | quantity | beekeeper_clothing (y/n) |
+assistant_clothing (y/n) | smoker_available (y/n) |
+clean_airtight_buckets_available_number
+
+```
+
 ## Create Inspection
 
 ```
 
-hive (number) | inspection (date) | weather_condition | hive_state | colony_strength | hive_temper | queen (y/n) | honeystore_condition | pollenstore_condition | smallhive_beetle | varrao_mites | safari_ants (y/n) | chalk_brood (y/n) | hive_condition | clothing_tools_condition
+hive (number) | inspection (date) | weather_condition | hive_state |
+colony_strength | hive_temper | queen (y/n) | honeystore_condition |
+pollenstore_condition | smallhive_beetle | varrao_mites | safari_ants (y/n) |
+chalk_brood (y/n) | hive_condition | clothing_tools_condition
 
 ```
 
@@ -97,4 +111,3 @@ Clothing/Tools condition
 * `fair`
 * `poor`
 * `damaged`
-
