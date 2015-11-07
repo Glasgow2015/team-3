@@ -153,6 +153,19 @@ public class InspectionForm extends SingleInputFormActivity {
                 )
         );
 
+        steps.add(
+                new OptionStep(context, DATA_KEY_QUEEN_CELLS,
+                        new String[]{
+                                "High",
+                                "Average",
+                                "Low"
+                        },
+                        R.string.queen_cells,
+                        R.string.queen_cells_error,
+                        R.string.queen_cells_hive_details
+                )
+        );
+
 
 
         steps.add(
