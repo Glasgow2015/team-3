@@ -1,1 +1,2 @@
+include ':libs:material-singleinputform:library'
 include ':app'
