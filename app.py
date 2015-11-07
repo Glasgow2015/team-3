@@ -49,21 +49,27 @@ def twilio_response():
     try:
         phone_number = request.values.get('From')
         endpoint, message_body = request.values.get('Body').split('|', 1)
-
         resp = twilio.twiml.Response()
 
         if endpoint.strip() == "add_inspection":
             try:
                 insp_dict = protocol.inspection_from_twilio(message_body)
                 r.table('inspections').insert(insp_dict).run(g.rdb_conn)
-            except Exception, ex:
-                resp.message(str(ex))
-            resp.message(json.dumps(insp_dict))
+                resp.message("OK")
+            except Exception as ex:
+                resp.message("FAIL Bad format: {}".format(str(ex)))
+        elif endpoint.strip() == "add_harvest":
+            try:
+                harvest_dict = protocol.harvest_from_twilio(message_body)
+                r.table('harvests').insert(harvest_dict).run(g.rdb_conn)
+                resp.message("OK")
+            except Exception as ex:
+                resp.message("FAIL Bad format: {}".format(str(ex)))
         else:
-            resp.message("Error: Unable to identify endpoint, {}".format(endpoint))
+            resp.message("FAIL No such operation")
 
         return str(resp)
     except Exception as e:
         resp = twilio.twiml.Response()
-        resp.message("Sorry :(! An error occurred, please try again later.")
-        return resp
+        resp.message("FAIL Unknown Error lol {}".format(str(e)))
+        return str(resp)
