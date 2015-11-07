@@ -179,6 +179,21 @@ public class InspectionForm extends SingleInputFormActivity {
                 )
         );
 
+        steps.add(
+                new OptionStep(context, DATA_KEY_HIVE_BEETLE,
+                        new String[]{
+                                "Light",
+                                "Moderate",
+                                "Heavy"
+                        },
+                        R.string.hive_beetle,
+                        R.string.hive_beetle_error,
+                        R.string.hive_beetle_description
+                )
+        );
+
+
+
 
 
         steps.add(
