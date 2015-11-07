@@ -26,7 +26,7 @@ clean_airtight_buckets_available_number
 
 ```
 
-hive (number) | inspection_da (date) | weather_condition | hive_state |
+hive (number) | inspection_dat (date) | weather_condition | hive_state |
 colony_strength | hive_temper | queen (y/n) | honeystore_condition |
 pollenstore_condition | smallhive_beetle | varrao_mites | safari_ants (y/n) |
 chalk_brood (y/n) | hive_condition | clothing_tools_condition
