@@ -33,7 +33,7 @@ public class HarvestObject {
     @Override
     public String toString() {
         // TODO
-        String output = "" + date.getTime() + "|" +
+        String output = "" + date.getTimeInMillis() / 1000 + "|" +
                 numOfCombs + "|" +
                 getTrueFalse(cloth_beekeeper) + "|" +
                 getTrueFalse(cloth_assist) + "|" +
@@ -44,9 +44,9 @@ public class HarvestObject {
 
     private String getTrueFalse(int inp) {
         if (inp != 0) {
-            return "YES";
-        } else {
             return "NO";
+        } else {
+            return "YES";
         }
     }
 }
