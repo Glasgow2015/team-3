@@ -249,12 +249,26 @@ public class InspectionForm extends SingleInputFormActivity {
                             "Poor",
                             "Damaged"
                         },
-                        R.string.chalk_brood,
-                        R.string.chalk_brood_error,
-                        R.string.chalk_brood_description
+                        R.string.hive_condition,
+                        R.string.hive_condition_error,
+                        R.string.hive_condition_description
                 )
         );
 
+
+        steps.add(
+                new OptionStep(context, DATA_KEY_CLOTHING_CONDITION,
+                        new String[]{
+                                "Good",
+                                "Fair",
+                                "Poor",
+                                "Damaged"
+                        },
+                        R.string.clothing_tools_condition,
+                        R.string.clothing_tools_condition_error,
+                        R.string.clothing_tools_condition_description
+                )
+        );
 
         steps.add(
                 new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
