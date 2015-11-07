@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect, jsonify, render_template
+from flask import Flask, request, redirect, jsonify, render_template, g
 import twilio.twiml
 import rethinkdb as r
+import os
 from rethinkdb.errors import RqlRuntimeError
 
 app = Flask(__name__)
@@ -46,6 +47,8 @@ def twilio_response():
     try:
         phone_number = request.values.get('From')
         message_body = request.values.get('Body')
+
+        r.table('hives').insert({"dank":"memes"}).run(g.rdb_conn);
 
         response = "YOLO: {}".format(message_body)
 
