@@ -34,4 +34,31 @@
     <string name="city">City</string>
     <string name="city_error">Enter a city.</string>
     <string name="city_details">We need this information to find you if you mess with us.</string>
+
+
+    <!-- HARVEST strings. -->
+    <string name="harvest_date_title">Date of harvest</string>
+    <string name="harvest_date_error">Please ensure you entered a correct date!</string>
+    <string name="harvest_date_detail">The date of the harvest.</string>
+
+    <string name="harvest_quant_title">How many combs were harvested?</string>
+    <string name="harvest_quant_error">Ensure you entered a positive number.</string>
+    <string name="harvest_quant_detail">The number of ripe combs harvested.</string>
+
+    <string name="harvest_cloth_bee_title">Did the beekeeper wear protective clothing?</string>
+    <string name="harvest_cloth_bee_error">Please select "Yes" or "No"</string>
+    <string name="harvest_cloth_bee_detail">Whether there was protective clothing available for the beekeeper.</string>
+
+    <string name="harvest_cloth_assist_title">Did the assistants wear protective clothing?</string>
+    <string name="harvest_cloth_assist_error">Please select "Yes" or "No"</string>
+    <string name="harvest_cloth_assist_detail">Whether there was protective clothing available for the assistants.</string>
+
+    <string name="harvest_smoker_title">Was a smoker available?</string>
+    <string name="harvest_smoker_error">Please select "Yes" or "No"</string>
+    <string name="harvest_smoker_detail">Whether there was a smoker available.</string>
+
+    <string name="harvest_num_buck_title">How many buckets were available?</string>
+    <string name="harvest_num_buck_error">Ensure that you entered a positive number.</string>
+    <string name="harvest_num_buck_detail">The number of clean, airtight buckets available for harvest.</string>
+
 </resources>

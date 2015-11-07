@@ -27,9 +27,40 @@ public class HarvestForm extends SingleInputFormActivity {
     private static final String DATA_KEY_BIRTHDAY = "birthday";
     private static final String DATA_KEY_CITY = "city";
 
+
+    private static final String DATA_KEY_DATE = "date";
+
+
     @Override
     protected List<Step> getSteps(Context context){
         List<Step> steps = new ArrayList<Step>();
+
+        // Add harvest date.
+        steps.add(
+                new DateStep(context, DATA_KEY_BIRTHDAY,
+                        R.string.birthday,
+                        R.string.birthday_error,
+                        R.string.birthday_details,
+                        new DateStep.StepChecker(){
+                    @Override
+                    public boolean check(int year, int month, int day){
+                        Calendar today = new GregorianCalendar();
+                        Calendar birthday = new GregorianCalendar(year, month, day);
+                        today.add(Calendar.YEAR, -14);
+                        return today.after(birthday);
+                    }
+                })
+        );
+        // Quantity of ripe combs.
+
+        // Protective clothing available for beekeeper YES/NO.
+        // Protective clothing available for all assistants YES/NO.
+
+        // Smoker available, YES/NO.
+
+        // Number of clean, airtight buckets available for harvest.
+
+
         steps.add(
                 new CheckBoxStep(context, DATA_KEY_EULA, R.string.eula, R.string.eula_title, R.string.eula_error, R.string.eula_details, new CheckBoxStep.StepChecker() {
                     @Override
