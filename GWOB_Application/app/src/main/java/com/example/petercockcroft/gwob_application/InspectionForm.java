@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.heinrichreimersoftware.singleinputform.SingleInputFormActivity;
 import com.heinrichreimersoftware.singleinputform.steps.CheckBoxStep;
 import com.heinrichreimersoftware.singleinputform.steps.DateStep;
+import com.heinrichreimersoftware.singleinputform.steps.OptionStep;
 import com.heinrichreimersoftware.singleinputform.steps.SeekBarStep;
 import com.heinrichreimersoftware.singleinputform.steps.Step;
 import com.heinrichreimersoftware.singleinputform.steps.TextStep;
@@ -30,6 +31,8 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_BIRTHDAY = "birthday";
     private static final String DATA_KEY_CITY = "city";
 
+    private static final String DATA_KEY_HIVE_NUMBER = "hive_no";
+
     @Override
     protected List<Step> getSteps(Context context){
         List<Step> steps = new ArrayList<Step>();
@@ -40,6 +43,14 @@ public class InspectionForm extends SingleInputFormActivity {
                         return input;
                     }
                 })
+        );
+        steps.add(
+                new OptionStep(context, DATA_KEY_HIVE_NUMBER,
+                        new String[]{"Yes", "No"},
+                        R.string.hive_no,
+                        R.string.hive_error,
+                        R.string.hive_details
+                )
         );
         steps.add(
                 new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {

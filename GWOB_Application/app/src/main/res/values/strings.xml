@@ -9,6 +9,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_harvest_form">HarvestForm</string>
+    <string name="title_activity_inspection_form">HarvestForm</string>
 
     <string name="eula">Accept</string>
     <string name="eula_title">EULA</string>
@@ -74,5 +75,6 @@
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
+
 
 </resources>
