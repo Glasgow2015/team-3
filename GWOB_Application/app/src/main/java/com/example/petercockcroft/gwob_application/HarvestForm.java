@@ -37,6 +37,8 @@ public class HarvestForm extends SingleInputFormActivity {
     private static final String DATA_KEY_BUCKETS = "buckets";
 
 
+
+
     @Override
     protected List<Step> getSteps(Context context) {
         List<Step> steps = new ArrayList<Step>();
