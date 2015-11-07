@@ -16,7 +16,7 @@ The maximum size of a message is 1600 characters
 
 ```
 
-harvestdate (date) | quantity | beekeeper_clothing (y/n) |
+harvest_date (date) | quantity | beekeeper_clothing (y/n) |
 assistant_clothing (y/n) | smoker_available (y/n) |
 clean_airtight_buckets_available_number
 
