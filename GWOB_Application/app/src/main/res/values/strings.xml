@@ -88,7 +88,7 @@
     <string name="temper_of_hive">Temper of Hive</string>
     <string name="temper_of_hive_error">Please choose one of the suggested options.</string>
     <string name="temper_of_hive_details">Please choose the temper of the hive.</string>
-    
+
     <string name="queen_cells">Queen Cells</string>
     <string name="queen_cells_error">Queen cells, chose one of the suggested options.</string>
     <string name="queen_cells_hive_details">Are the Queen cells in brood combs?</string>
