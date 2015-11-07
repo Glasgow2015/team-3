@@ -36,6 +36,7 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_WEATHER_CONDITIONS = "weather conditions";
     private static final String DATA_KEY_STATE_OF_HIVE = "state of hive";
     private static final String DATA_KEY_STRENGTH = "strength of hive";
+    private static final String DATA_KEY_TEMPER = "temper of hive";
 
     @Override
     protected List<Step> getSteps(Context context){
@@ -127,6 +128,19 @@ public class InspectionForm extends SingleInputFormActivity {
                         R.string.strength_of_hive,
                         R.string.strength_of_hive_error,
                         R.string.strength_of_hive_details
+                )
+        );
+
+        steps.add(
+                new OptionStep(context, DATA_KEY_TEMPER,
+                        new String[]{
+                                "Calm",
+                                "Nervous",
+                                "Angry"
+                        },
+                        R.string.temper_of_hive,
+                        R.string.temper_of_hive_error,
+                        R.string.temper_of_hive_details
                 )
         );
 
