@@ -84,6 +84,10 @@
     <string name="strength_of_hive_error">Please chose one of the suggested options.</string>
     <string name="strength_of_hive_details">Please chose the strength of the hive.</string>
 
+    <string name="temper_of_hive">Temper of Hive</string>
+    <string name="temper_of_hive_error">Temper chose one of the suggested options.</string>
+    <string name="temper_of_hive_details">Please chose the Temper of the hive.</string>
+
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
