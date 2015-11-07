@@ -36,6 +36,7 @@
     <string name="city_details">We need this information to find you if you mess with us.</string>
 
 
+
     <!-- HARVEST strings. -->
     <string name="harvest_date_title">Date of harvest</string>
     <string name="harvest_date_error">Please ensure you entered a correct date!</string>
@@ -60,5 +61,15 @@
     <string name="harvest_num_buck_title">How many buckets were available?</string>
     <string name="harvest_num_buck_error">Ensure that you entered a positive number.</string>
     <string name="harvest_num_buck_detail">The number of clean, airtight buckets available for harvest.</string>
+
+
+    <string name="hive_no">Enter Hive Number</string>
+    <string name="hive_error">Please enter a valid hive number.</string>
+    <string name="hive_details">The number of the hive should be located on the side of the box.</string>
+
+    <string name="inspection_date">Inspection Date</string>
+    <string name="inspection_date_error_future">Date cannot be in the future.</string>
+    <string name="inspection_date_details">Please enter the date of the inspection (cannot be in the future).</string>
+
 
 </resources>
