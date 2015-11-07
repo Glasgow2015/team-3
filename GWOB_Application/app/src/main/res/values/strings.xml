@@ -89,11 +89,11 @@
     <string name="queen_cells_error">Queen cells, chose one of the suggested options.</string>
     <string name="queen_cells_hive_details">Are the Queen cells in brood combs?</string>
 
-    <string name="honey_stores">Condidtion - Honey</string>
+    <string name="honey_stores">Condition - Honey</string>
     <string name="honey_stores_error">That is the condition of the honey stores?</string>
     <string name="honey_stores_details">What is the condition of the honey stores?</string>
 
-    <string name="pollen_stores">Condidtion - Pollen</string>
+    <string name="pollen_stores">Condition - Pollen</string>
     <string name="pollen_stores_error">That is the condition of the pollen stores?</string>
     <string name="pollen_stores_details">What is the condition of the pollen stores?</string>
 
