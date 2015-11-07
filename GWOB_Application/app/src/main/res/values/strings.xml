@@ -64,6 +64,7 @@
     <string name="harvest_num_buck_detail">The number of clean, airtight buckets available for harvest.</string>
 
 
+    <!-- INSPECTION strings. -->
     <string name="hive_no">Enter Hive Number</string>
     <string name="hive_error">Please enter a valid hive number.</string>
     <string name="hive_details">The number of the hive should be located on the side of the box.</string>
@@ -84,9 +85,33 @@
     <string name="strength_of_hive_error">Please chose one of the suggested options.</string>
     <string name="strength_of_hive_details">Please chose the strength of the hive.</string>
 
-    <string name="temper_of_hive">Temper of Hive</string>
-    <string name="temper_of_hive_error">Temper chose one of the suggested options.</string>
-    <string name="temper_of_hive_details">Please chose the Temper of the hive.</string>
+    <string name="queen_cells">Queen Cells</string>
+    <string name="queen_cells_error">Queen cells, chose one of the suggested options.</string>
+    <string name="queen_cells_hive_details">Are the Queen cells in brood combs?</string>
+
+    <string name="honey_stores">Condidtion - Honey</string>
+    <string name="honey_stores_error">That is the condition of the honey stores?</string>
+    <string name="honey_stores_details">What is the condition of the honey stores?</string>
+
+    <string name="pollen_stores">Condidtion - Pollen</string>
+    <string name="pollen_stores_error">That is the condition of the pollen stores?</string>
+    <string name="pollen_stores_details">What is the condition of the pollen stores?</string>
+
+    <string name="hive_beetle">Hive Beetle</string>
+    <string name="hive_beetle_error">Small Hive Beetle Present?</string>
+    <string name="hive_beetle_description">Small Hive Beetle Presence?</string>
+
+    <string name="varrao_mites">Varrao Mites</string>
+    <string name="varrao_mites_error">Varrao Mites present?</string>
+    <string name="varrao_mites_description">Varrao Mites Presence?</string>
+
+    <string name="safari_ants">Safari Ants</string>
+    <string name="safari_ants_error">Safari Ants present?</string>
+    <string name="safari_ants_description">Safari Ants present?</string>
+
+    <string name="chalk_brood">Chalk Brood</string>
+    <string name="chalk_brood_error">Chalk Brood present?</string>
+    <string name="chalk_brood_description">Chalk Brood present?</string>
 
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
