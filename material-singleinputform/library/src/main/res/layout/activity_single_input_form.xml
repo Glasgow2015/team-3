@@ -77,7 +77,6 @@
                 <ProgressBar
                     android:id="@+id/progressbar"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:progressDrawable="@drawable/progress_single_input_form"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/setup_progressbar_height"
                     android:layout_gravity="bottom"/>
