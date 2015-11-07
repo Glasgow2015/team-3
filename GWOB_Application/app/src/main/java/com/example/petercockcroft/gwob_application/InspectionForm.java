@@ -33,6 +33,7 @@ public class InspectionForm extends SingleInputFormActivity {
 
     private static final String DATA_KEY_HIVE_NUMBER = "hive_no";
     private static final String DATA_KEY_DATE_INSPECTION = "inspection date";
+    private static final String DATA_KEY_WEATHER_CONDITIONS = "weather conditions";
 
     @Override
     protected List<Step> getSteps(Context context){
@@ -82,6 +83,21 @@ public class InspectionForm extends SingleInputFormActivity {
                                 return today.after(harvest_date);
                             }
                         })
+        );
+
+        steps.add(
+                new OptionStep(context, DATA_KEY_WEATHER_CONDITIONS,
+                        new String[]{
+                                "Sunny",
+                                "Partly Cloudy",
+                                "Cloudy",
+                                "Rain",
+                                "Windy"
+                        },
+                        R.string.weather_conditions,
+                        R.string.weather_conditions_error,
+                        R.string.weather_conditions_details
+                )
         );
 
         steps.add(
