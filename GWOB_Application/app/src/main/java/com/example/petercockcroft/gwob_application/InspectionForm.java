@@ -204,7 +204,18 @@ public class InspectionForm extends SingleInputFormActivity {
                 )
         );
 
-
+        steps.add(
+                new OptionStep(context, DATA_KEY_VARRAO_MITES,
+                        new String[]{
+                                "Light",
+                                "Moderate",
+                                "Heavy"
+                        },
+                        R.string.varrao_mites,
+                        R.string.varrao_mites_error,
+                        R.string.varrao_mites_description
+                )
+        );
 
 
 
