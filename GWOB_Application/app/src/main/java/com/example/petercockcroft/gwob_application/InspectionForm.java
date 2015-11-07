@@ -230,6 +230,18 @@ public class InspectionForm extends SingleInputFormActivity {
         );
 
         steps.add(
+                new OptionStep(context, DATA_KEY_CHALK_BROOD,
+                        new String[]{
+                                getResources().getString(R.string.boolean_positive),
+                                getResources().getString(R.string.boolean_negative)
+                        },
+                        R.string.chalk_brood,
+                        R.string.chalk_brood_error,
+                        R.string.chalk_brood_description
+                )
+        );
+
+        steps.add(
                 new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
                     @Override
                     public boolean check(String input) {
