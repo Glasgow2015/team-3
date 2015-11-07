@@ -6,6 +6,8 @@ import android.text.InputType;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.petercockcroft.gwob_application.storage.HarvestObject;
+import com.example.petercockcroft.gwob_application.storage.StorageManager;
 import com.heinrichreimersoftware.singleinputform.SingleInputFormActivity;
 import com.heinrichreimersoftware.singleinputform.steps.CheckBoxStep;
 import com.heinrichreimersoftware.singleinputform.steps.DateStep;
@@ -149,58 +151,27 @@ public class HarvestForm extends SingleInputFormActivity {
                         })
         );
 
-//        steps.add(
-//                new CheckBoxStep(context, DATA_KEY_EULA, R.string.eula, R.string.eula_title, R.string.eula_error, R.string.eula_details, new CheckBoxStep.StepChecker() {
-//                    @Override
-//                    public boolean check(boolean input) {
-//                        return input;
-//                    }
-//                })
-//        );
-//        steps.add(
-//                new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
-//                    @Override
-//                    public boolean check(String input) {
-//                        return android.util.Patterns.EMAIL_ADDRESS.matcher(input).matches();
-//                    }
-//                })
-//        );
-//        steps.add(
-//                new TextStep(context, DATA_KEY_PASSWORD, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, R.string.password, R.string.password_error, R.string.password_details, new TextStep.StepChecker() {
-//                    @Override
-//                    public boolean check(String input) {
-//                        return input.length() >= 5;
-//                    }
-//                })
-//        );
-//        steps.add(
-//                new DateStep(context, DATA_KEY_BIRTHDAY, R.string.birthday, R.string.birthday_error, R.string.birthday_details, new DateStep.StepChecker() {
-//                    @Override
-//                    public boolean check(int year, int month, int day) {
-//                        Calendar today = new GregorianCalendar();
-//                        Calendar birthday = new GregorianCalendar(year, month, day);
-//                        today.add(Calendar.YEAR, -14);
-//                        return today.after(birthday);
-//                    }
-//                })
-//        );
-//        steps.add(
-//                new SeekBarStep(context, DATA_KEY_HEIGHT, 150, 180, R.string.height, R.string.height_error, R.string.height_details, new SeekBarStep.StepChecker() {
-//                    @Override
-//                    public boolean check(int progress) {
-//                        return progress >= 160;
-//                    }
-//                })
-//        );
-//        steps.add(
-//                new TextStep(context, DATA_KEY_CITY, InputType.TYPE_CLASS_TEXT, R.string.city, R.string.city_error, R.string.city_details)
-//        );
-//
         return steps;
     }
 
     @Override
     protected void onFormFinished(Bundle data) {
+        // Extract information from form.
+        int day = DateStep.day(data, DATA_KEY_DATE),
+                month = DateStep.month(data, DATA_KEY_DATE),
+                year = DateStep.year(data, DATA_KEY_DATE),
+                numOfCombs = Integer.parseInt(TextStep.text(data, DATA_KEY_RIPE_COMBS)),
+                cloth_bee = OptionStep.selectedOption(data, DATA_KEY_CLOTH_BEE),
+                cloth_ass = OptionStep.selectedOption(data, DATA_KEY_CLOTH_ASSIST),
+                smoker = OptionStep.selectedOption(data, DATA_KEY_SMOKER),
+                numOfBuckets = Integer.parseInt(TextStep.text(data, DATA_KEY_BUCKETS));
+
+
+        // Create Harvest object.
+        HarvestObject results = new HarvestObject(new GregorianCalendar(year, month, day),
+                numOfCombs, cloth_bee, cloth_ass, smoker, numOfBuckets);
+        // Add element to storage.
+        StorageManager.addRecordToStorage(results);
         Toast.makeText(this, "Form finished: " +
                         DateStep.day(data, DATA_KEY_DATE) + ", " +
                         TextStep.text(data, DATA_KEY_RIPE_COMBS) + ", " +
