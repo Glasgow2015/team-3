@@ -10,8 +10,7 @@ def harvest_from_twilio(input):
     }
 
 weather_conditions = ["sunny","partly_cloudy","cloudy","rain","windy"]
-hive_states =
-["notinuse","notoccupied","occupied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood","unknown"]
+hive_states = ["notinuse","notoccupied","occupied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood","unknown"]
 colony_strength = ["strong","moderate","weak","critical"]
 temper_of_hives = ["calm","nervous","angry"]
 comb_conditions = ["high","average","low"]
