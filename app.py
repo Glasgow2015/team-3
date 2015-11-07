@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, jsonify, render_template
 import os
 import twilio.twiml
+import rethinkdb as r
 
 app = Flask(__name__)
 
