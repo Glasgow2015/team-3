@@ -76,6 +76,10 @@
     <string name="weather_conditions_error">Please chose one of the suggested options.</string>
     <string name="weather_conditions_details">Please select one of the suggested options.</string>
 
+    <string name="state_of_hive">State of Hive</string>
+    <string name="state_of_hive_error">Please chose one of the suggested options.</string>
+    <string name="state_of_hive_details">Please select one of the suggested options.</string>
+
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
