@@ -32,6 +32,7 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_CITY = "city";
 
     private static final String DATA_KEY_HIVE_NUMBER = "hive_no";
+    private static final String DATA_KEY_DATE_INSPECTION = "inspection date";
 
     @Override
     protected List<Step> getSteps(Context context){
@@ -45,13 +46,44 @@ public class InspectionForm extends SingleInputFormActivity {
                 })
         );
         steps.add(
-                new OptionStep(context, DATA_KEY_HIVE_NUMBER,
-                        new String[]{"Yes", "No"},
+                new TextStep(context, DATA_KEY_HIVE_NUMBER,
+                        InputType.TYPE_CLASS_NUMBER,
                         R.string.hive_no,
                         R.string.hive_error,
-                        R.string.hive_details
-                )
+                        R.string.hive_details,
+                        new TextStep.StepChecker() {
+                            @Override
+                            public boolean check(String input) {
+                                int result;
+                                try {
+                                    result = Integer.parseInt(input);
+                                } catch(NumberFormatException e) {
+                                    return false;
+                                } catch(NullPointerException e) {
+                                    return false;
+                                }
+                                // Check if positive.
+                                if (result < 0) return false;
+                                else return true;
+                            }
+                        })
         );
+
+        steps.add(
+                new DateStep(context, DATA_KEY_DATE_INSPECTION,
+                        R.string.inspection_date,
+                        R.string.inspection_date_error_future,
+                        R.string.inspection_date_details,
+                        new DateStep.StepChecker() {
+                            @Override
+                            public boolean check(int year, int month, int day) {
+                                Calendar today = new GregorianCalendar();
+                                Calendar harvest_date = new GregorianCalendar(year, month, day);
+                                return today.after(harvest_date);
+                            }
+                        })
+        );
+
         steps.add(
                 new TextStep(context, DATA_KEY_EMAIL, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, R.string.email, R.string.email_error, R.string.email_details, new TextStep.StepChecker() {
                     @Override
