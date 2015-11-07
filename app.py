@@ -39,10 +39,9 @@ def teardown_request(exception):
     except AttributeError:
         pass
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def hello():
-    return 'python/flask'
-
+    return render_template("index.html") 
 
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():
