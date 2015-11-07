@@ -72,6 +72,10 @@
     <string name="inspection_date_error_future">Date cannot be in the future.</string>
     <string name="inspection_date_details">Please enter the date of the inspection (cannot be in the future).</string>
 
+    <string name="weather_conditions">Weather Conditions</string>
+    <string name="weather_conditions_error">Please chose one of the suggested options.</string>
+    <string name="weather_conditions_details">Please select one of the suggested options.</string>
+
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
