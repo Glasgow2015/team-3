@@ -156,13 +156,25 @@ public class InspectionForm extends SingleInputFormActivity {
         steps.add(
                 new OptionStep(context, DATA_KEY_QUEEN_CELLS,
                         new String[]{
-                                "High",
-                                "Average",
-                                "Low"
+                                getResources().getString(R.string.boolean_positive),
+                                getResources().getString(R.string.boolean_negative)
                         },
                         R.string.queen_cells,
                         R.string.queen_cells_error,
                         R.string.queen_cells_hive_details
+                )
+        );
+
+        steps.add(
+                new OptionStep(context, DATA_KEY_HONEY_STORES,
+                        new String[]{
+                                "High",
+                                "Average",
+                                "Low"
+                        },
+                        R.string.honey_stores,
+                        R.string.honey_stores_error,
+                        R.string.honey_stores_details
                 )
         );
 
