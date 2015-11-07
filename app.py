@@ -43,6 +43,13 @@ def teardown_request(exception):
 def hello():
     return render_template("index.html") 
 
+@app.route('/new_apiary', methods=["GET", "POST"])
+def new_apiary():
+    if request.method == "GET":
+        return render_template("new_apiary.html") 
+    else:
+        return render_template("new_apiary.html", alert="Hive Created!")
+
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():
     try:
