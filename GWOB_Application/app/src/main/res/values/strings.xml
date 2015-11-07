@@ -117,6 +117,14 @@
     <string name="chalk_brood_error">Chalk Brood present?</string>
     <string name="chalk_brood_description">Chalk Brood present?</string>
 
+    <string name="hive_condition">Hive Condition</string>
+    <string name="hive_condition_error">What is the hive condition?</string>
+    <string name="hive_condition_description">What is the hive condition?</string>
+
+    <string name="clothing_tools_condition">Clothing/Tools Condition</string>
+    <string name="clothing_tools_condition_error">What is the condition of the clothing/tools?</string>
+    <string name="clothing_tools_condition_description">What is the condition of the clothing/tools?</string>
+
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
