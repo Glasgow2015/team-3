@@ -55,7 +55,7 @@ Hive state:
 * `ants`
 * `fire`
 * `flood`
-* `justdead`
+* `unknown`
 
 
 Colony strength

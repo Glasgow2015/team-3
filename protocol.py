@@ -6,11 +6,12 @@ def harvest_from_twilio(input):
         "beekeeper_clothing": elements[2].strip().lower() == "yes",
         "assistant_clothing": elements[3].strip().lower() == "yes",
         "smoker_available": elements[4].strip().lower() == "yes",
-        "clean_airtight_buckets_available_number": int(elements[1].strip())
+        "clean_airtight_buckets_available_number": int(elements[5].strip())
     }
 
 weather_conditions = ["sunny","partly_cloudy","cloudy","rain","windy"]
-hive_states = ["notinuse","notoccupied","occupied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood", "justdead"]
+hive_states =
+["notinuse","notoccupied","occupied","absconded","robbed","honeybadgered","mites","beetle","ants","fire","flood","unknown"]
 colony_strength = ["strong","moderate","weak","critical"]
 temper_of_hives = ["calm","nervous","angry"]
 comb_conditions = ["high","average","low"]
@@ -65,7 +66,7 @@ def inspection_from_twilio(input):
         "clothing_tools_condition": elements[14].strip().lower()
     }
 def harvest_to_twilio (input):
-    return "{}|{}|{}|{}|{}|{}".format(
+    return "|".join("{}" * 6).format(
         input["harvest_date"], \
         input["quantity"], \
         "YES" if input["beekeeper_clothing"] else "NO", \
@@ -75,7 +76,7 @@ def harvest_to_twilio (input):
         )
 
 def inspection_to_twilio (input):
-    return "{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}".format(
+    return "|".join("{}" * 15).format(
         input["hive"], \
         input["inspection_date"], \
         input["weather_condition"], \
