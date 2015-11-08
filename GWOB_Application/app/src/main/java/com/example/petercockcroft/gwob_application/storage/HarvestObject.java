@@ -22,6 +22,7 @@ public class HarvestObject {
                          int cloth_assist,
                          int isSmoker,
                          int numOfBuckets) {
+        super();
         this.date = date;
         this.numOfCombs = numOfCombs;
         this.cloth_beekeeper = cloth_beekeeper;

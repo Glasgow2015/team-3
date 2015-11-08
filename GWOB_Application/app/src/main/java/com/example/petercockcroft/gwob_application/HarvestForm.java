@@ -160,14 +160,5 @@ public class HarvestForm extends SingleInputFormActivity {
                 numOfCombs, cloth_bee, cloth_ass, smoker, numOfBuckets);
         // Add element to storage.
         StorageManager.addRecordToStorage(results);
-        Toast.makeText(this, "Form finished: " +
-                        DateStep.day(data, DATA_KEY_DATE) + ", " +
-                        TextStep.text(data, DATA_KEY_RIPE_COMBS) + ", " +
-                        OptionStep.selectedOption(data, DATA_KEY_CLOTH_BEE) + ", " +
-                        OptionStep.selectedOption(data, DATA_KEY_CLOTH_ASSIST) + ", " +
-                        OptionStep.selectedOption(data, DATA_KEY_SMOKER) + ", " +
-                        TextStep.text(data, DATA_KEY_BUCKETS),
-                Toast.LENGTH_LONG).show();
-        Log.d("MainActivity", "data: " + data.toString());
     }
 }
