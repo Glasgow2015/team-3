@@ -27,12 +27,12 @@ public class StorageManager {
 
         if (record instanceof HarvestObject) {
             key = HARVEST_DATA_KEY;
-            smsSender.sendSms("_harvest|" + record.toString());
+            smsSender.sendSms("add_harvest|" + record.toString());
             return 0;
 
         } else if (record instanceof InspectionObject) {
             key = INSPECTION_DATA_KEY;
-            smsSender.sendSms("_inspection|" + record.toString());
+            smsSender.sendSms("add_inspection|" + record.toString());
             return 0;
 
         } else {
