@@ -323,3 +323,7 @@ def twilio_response():
         resp = twilio.twiml.Response()
         resp.message("FAIL Unknown Error lol {}".format(str(e)))
         return str(resp)
+
+@app.route("/stats/<string:hiveid>")
+def serve_stats(hiveid):
+    return render_template()

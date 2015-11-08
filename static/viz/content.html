@@ -1,0 +1,109 @@
+<head>
+    <script src="d3.min.js"></script>
+    <script src="crossfilter.js"></script>
+
+    <script src="dc.js"></script>
+    <link rel="stylesheet" type="text/css" href="dc.css">
+
+</head>
+<body>
+<div id="quantLineChart"></div>
+<div id="ac"></div>
+<div id="bc"></div>
+<div id="smoke"></div>
+<div id="buckets"></div>
+
+
+<script type="text/javascript">
+    d3.csv("/data.csv", function (d) {
+        // Parse dates.
+        d.forEach(function (d) {
+            d.date = new Date(+d.Date * 1000);
+            d.quantity = +d.Quantity;
+            d.bc = (d.BC == "YES");
+            d.ac = (d.AC == "YES");
+            d.smoke = (d.Smoke == "YES");
+            d.buckets = +d.Buckets;
+        });
+
+        var colorScale = d3.scale.ordinal().range(["#f8a348", "#E9871C"]);
+
+
+        // Create the crossfilter object.
+        ndx = crossfilter(d);
+
+        // Create charts.
+        var quantChart = dc.lineChart('#quantLineChart');
+        var acChart = dc.pieChart('#ac');
+        var bcChart = dc.pieChart('#bc');
+        var smoke = dc.pieChart('#smoke');
+        //var bucketLineChart = dc.lineChart('#buckets');
+
+        var all = ndx.groupAll();
+
+        var dateDimension = ndx.dimension(function (d) {
+            return d3.time.minute(d.date);
+        });
+
+        var quantGroup = dateDimension.group().reduceSum(function (d) {
+            return d.quantity;
+        });
+
+        quantChart
+                .width(500)
+                .height(500)
+                .x(d3.time.scale().domain(d3.extent(d, function (d) {
+                    return d.date;
+                }))).renderArea(true)
+                .xUnits(d3.time.day)
+                .brushOn(false)
+                .renderDataPoints(true)
+                .clipPadding(10)
+                .yAxisLabel("This is the Y Axis!")
+                .dimension(dateDimension)
+                .group(quantGroup)
+                .colors(colorScale);
+        quantChart.render();
+
+        var acDim = ndx.dimension(function (d) {
+            return d.ac;
+        });
+
+        var bcDim = ndx.dimension(function (d) {
+            return d.bc;
+        });
+
+        var smokeDim = ndx.dimension(function (d) {
+            return d.smoke;
+        });
+
+        acChart
+                .width(500)
+                .height(500)
+                .dimension(acDim)
+                .group(acDim.group())
+                .colors(colorScale);
+        acChart.render();
+
+        bcChart
+                .width(500)
+                .height(500)
+                .dimension(bcDim)
+                .group(bcDim.group())
+                .colors(colorScale);
+        bcChart.render();
+
+        smoke
+                .width(500)
+                .height(500)
+                .dimension(smokeDim)
+                .group(smokeDim.group())
+                .colors(colorScale);
+        smoke.render();
+
+    });
+
+</script>
+</body>
+
+

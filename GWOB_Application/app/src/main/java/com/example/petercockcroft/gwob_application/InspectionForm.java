@@ -306,6 +306,7 @@ public class InspectionForm extends SingleInputFormActivity {
         );
 
         // Add inspection to storage.
-        StorageManager.addRecordToStorage(inspection);
+        int retc = StorageManager.addRecordToStorage(inspection);
+        System.out.println(retc);
     }
 }
