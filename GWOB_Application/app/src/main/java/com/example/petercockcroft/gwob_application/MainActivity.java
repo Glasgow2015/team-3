@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.petercockcroft.gwob_application.storage.StorageManager;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         choiceInspection = findViewById(R.id.choice_one);
         ((TextView)choiceInspection.findViewById(R.id.choice_name)).setText("Oh yeah bitches! Inspection.");
+        ((ImageView)choiceInspection.findViewById(R.id.hexPic)).setImageResource(R.drawable.glass);
         choiceInspection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         choiceHarvest = findViewById(R.id.choice_two);
         ((TextView)choiceHarvest.findViewById(R.id.choice_name)).setText("Oh yeah bitches! Harvest.");
+        ((ImageView)choiceHarvest.findViewById(R.id.hexPic)).setImageResource(R.drawable.hex);
         choiceHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         choiceReport = findViewById(R.id.choice_three);
+        ((ImageView)choiceReport.findViewById(R.id.hexPic)).setImageResource(R.drawable.report);
         ((TextView)choiceReport.findViewById(R.id.choice_name)).setText("REPOAAARTS");
         choiceReport.setOnClickListener(new View.OnClickListener() {
             @Override
