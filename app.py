@@ -202,7 +202,7 @@ dbSetup()
 @app.before_request
 def before_request():
     try:
-        g.rdb_conn = r.connect(DB_HOST, DB_PORT)
+        g.rdb_conn = r.connect(DB_HOST, DB_PORT, DB)
     except RqlDriverError:
         abort(503, "Database connection could be established.")
 
@@ -219,7 +219,7 @@ def new_apiary():
     if request.method == "POST" and form.validate():
         r.table('apiaries').insert(form.data).run(g.rdb_conn)
         return redirect("/list_apiaries", code=302) 
-    return render_template("new_apiary.html", alert="LOL", form=form)
+    return render_template("new_apiary.html", form=form)
 
 @app.route('/')
 def list_apiaries():
@@ -267,7 +267,7 @@ def new_hive(apiaryid):
         data['date_of_installation'] = time.time()
         r.table('hives').insert(data).run(g.rdb_conn)
         return redirect("/list_hives/{}".format(apiaryid), code=302) 
-    return render_template("new_hive.html", alert="LOL", form=form)
+    return render_template("new_hive.html", form=form)
 
 @app.route('/new_harvest/<string:apiaryid>', methods=["GET", "POST"])
 def new_harvest(apiaryid):
@@ -278,7 +278,7 @@ def new_harvest(apiaryid):
         data['harvest_date'] = time.time()
         r.table('harvests').insert(data).run(g.rdb_conn)
         return redirect("/", code=302) 
-    return render_template("new_harvest.html", alert="LOL", form=form)
+    return render_template("new_harvest.html", form=form)
 
 @app.route('/new_inspection/<string:hiveid>', methods=["GET", "POST"])
 def new_inspection(hiveid):
@@ -289,7 +289,7 @@ def new_inspection(hiveid):
         data['date_of_inspection'] = time.time()
         r.table('inspections').insert(data).run(g.rdb_conn)
         return redirect("/", code=302) 
-    return render_template("new_inspection.html", alert="LOL", form=form)
+    return render_template("new_inspection.html", form=form)
 
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():
