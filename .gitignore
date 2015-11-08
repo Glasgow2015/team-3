@@ -50,7 +50,10 @@ crashlytics-build.properties
 
 
 ### Python ###
+<<<<<<< HEAD
 >>>>>>> Updated gitignore
+=======
+>>>>>>> b75451aca173dfe7986a4cd9d5a0d96115ef2603
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
