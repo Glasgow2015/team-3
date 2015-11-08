@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         choiceReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO add report class.
+                Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
+                startActivity(intent);
             }
         });
 
