@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">GWOB_Application</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_harvest_form">HarvestForm</string>
+    <string name="title_activity_inspection_form">HarvestForm</string>
+
+    <string name="eula">Accept</string>
+    <string name="eula_title">EULA</string>
+    <string name="eula_error">You must accept the EULA</string>
+    <string name="eula_details">Please accept our end-user license agreement.\n(Just a dummy)</string>
+
+    <string name="email">E-mail</string>
+    <string name="email_error">Empty or not well-formed</string>
+    <string name="email_details">Your e-mail will be used as your login. Type the one you use most often.</string>
+
+    <string name="password">Password</string>
+    <string name="password_error">Empty or not 5-chars long</string>
+    <string name="password_details">Type your own password (5-chars long). Your personal information is protected with this password.</string>
+
+    <string name="birthday">Birthday</string>
+    <string name="birthday_error">You must be at least 14.</string>
+    <string name="birthday_details">We will use your birthday only to calculate your age (older than 14).</string>
+
+    <string name="height">Body height</string>
+    <string name="height_error">You must be at least 160cm tall.</string>
+    <string name="height_details">Just another fake input (taller than 160cm).</string>
+
+    <string name="city">City</string>
+    <string name="city_error">Enter a city.</string>
+    <string name="city_details">We need this information to find you if you mess with us.</string>
+
+
+
+    <!-- HARVEST strings. -->
+    <string name="harvest_date_title">Date of Harvest</string>
+    <string name="harvest_date_error">Don\'t enter a future date.</string>
+    <string name="harvest_date_detail">The date of the harvest. This cannot be a date in the future.</string>
+
+    <string name="harvest_quant_title">Combs Harvested</string>
+    <string name="harvest_quant_error">Enter a positive number</string>
+    <string name="harvest_quant_detail">The number of ripe combs harvested.</string>
+
+    <string name="harvest_cloth_bee_title">Beekeeper\'s Clothing</string>
+    <string name="harvest_cloth_bee_error">Select "Yes" or "No"</string>
+    <string name="harvest_cloth_bee_detail">Was there protective clothing available for the beekeeper?</string>
+
+    <string name="harvest_cloth_assist_title">Assistants\' Clothing</string>
+    <string name="harvest_cloth_assist_error">Please select "Yes" or "No"</string>
+    <string name="harvest_cloth_assist_detail">Was there protective clothing available for the assistants?</string>
+
+    <string name="harvest_smoker_title">Smoker Availability</string>
+    <string name="harvest_smoker_error">Please select "Yes" or "No"</string>
+    <string name="harvest_smoker_detail">Was a smoker available?</string>
+
+    <string name="harvest_num_buck_title">Buckets Available</string>
+    <string name="harvest_num_buck_error">Enter a positive number.</string>
+    <string name="harvest_num_buck_detail">The number of clean, airtight buckets available for harvest.</string>
+
+
+    <!-- INSPECTION strings. -->
+    <string name="hive_no">Enter Hive Number</string>
+    <string name="hive_error">Please enter a valid hive number.</string>
+    <string name="hive_details">The number of the hive should be located on the side of the box.</string>
+
+    <string name="inspection_date">Inspection Date</string>
+    <string name="inspection_date_error_future">Date cannot be in the future.</string>
+    <string name="inspection_date_details">Please enter the date of the inspection (cannot be in the future).</string>
+
+    <string name="weather_conditions">Weather Conditions</string>
+    <string name="weather_conditions_error">Please chose one of the suggested options.</string>
+    <string name="weather_conditions_details">Please select one of the suggested options.</string>
+
+    <string name="state_of_hive">State of Hive</string>
+    <string name="state_of_hive_error">Please chose one of the suggested options.</string>
+    <string name="state_of_hive_details">Please select one of the suggested options.</string>
+
+    <string name="strength_of_hive">Strength of Hive</string>
+    <string name="strength_of_hive_error">Please choose one of the suggested options.</string>
+    <string name="strength_of_hive_details">Please choose the strength of the hive.</string>
+
+    <string name="temper_of_hive">Temper of Hive</string>
+    <string name="temper_of_hive_error">Please choose one of the suggested options.</string>
+    <string name="temper_of_hive_details">Please choose the temper of the hive.</string>
+
+    <string name="queen_cells">Queen Cells</string>
+    <string name="queen_cells_error">Queen cells, chose one of the suggested options.</string>
+    <string name="queen_cells_hive_details">Are the Queen cells in brood combs?</string>
+
+    <string name="honey_stores">Condition - Honey</string>
+    <string name="honey_stores_error">That is the condition of the honey stores?</string>
+    <string name="honey_stores_details">What is the condition of the honey stores?</string>
+
+    <string name="pollen_stores">Condition - Pollen</string>
+    <string name="pollen_stores_error">That is the condition of the pollen stores?</string>
+    <string name="pollen_stores_details">What is the condition of the pollen stores?</string>
+
+    <string name="hive_beetle">Hive Beetle</string>
+    <string name="hive_beetle_error">Small Hive Beetle Present?</string>
+    <string name="hive_beetle_description">Small Hive Beetle Presence?</string>
+
+    <string name="varrao_mites">Varrao Mites</string>
+    <string name="varrao_mites_error">Varrao Mites present?</string>
+    <string name="varrao_mites_description">Varrao Mites Presence?</string>
+
+    <string name="safari_ants">Safari Ants</string>
+    <string name="safari_ants_error">Safari Ants present?</string>
+    <string name="safari_ants_description">Safari Ants present?</string>
+
+    <string name="chalk_brood">Chalk Brood</string>
+    <string name="chalk_brood_error">Chalk Brood present?</string>
+    <string name="chalk_brood_description">Chalk Brood present?</string>
+
+    <string name="hive_condition">Hive Condition</string>
+    <string name="hive_condition_error">What is the hive condition?</string>
+    <string name="hive_condition_description">What is the hive condition?</string>
+
+    <string name="clothing_tools_condition">Clothing/Tools Condition</string>
+    <string name="clothing_tools_condition_error">What is the condition of the clothing/tools?</string>
+    <string name="clothing_tools_condition_description">What is the condition of the clothing/tools?</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="boolean_positive">Yes</string>
+    <string name="boolean_negative">No</string>
+    <string name="title_activity_main">hivemind</string>
+
+
+</resources>
