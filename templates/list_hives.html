@@ -1,0 +1,6 @@
+Apiary: {{ parent.name }}
+<ul>
+{% for datum in data %} 
+ <li>Number {{ datum.number }} | <a href="/list_inspections/{{ datum.number }}">Inspections </a> | <a href="/new_inspection/{{ datum.id }}">New Inspection</a></li>
+{% endfor %}
+</ul>
