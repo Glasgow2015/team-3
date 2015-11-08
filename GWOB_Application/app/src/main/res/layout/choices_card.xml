@@ -8,6 +8,16 @@
     android:layout_margin="10dp"
     android:layout_weight="1"
     card_view:cardCornerRadius="4dp">
+    <ImageView
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_action_name"
+        android:id="@+id/hexPic"
+        android:layout_gravity="left|center"
+        android:paddingLeft="10dp"
+        />
     <TextView
         android:id="@+id/choice_name"
         android:layout_width="match_parent"
