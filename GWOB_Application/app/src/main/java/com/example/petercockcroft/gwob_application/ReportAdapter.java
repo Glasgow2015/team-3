@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.petercockcroft.gwob_application.storage.HarvestObject;
+import com.example.petercockcroft.gwob_application.storage.InspectionObject;
+
 import java.util.List;
 
 public class ReportAdapter extends ArrayAdapter<Object> {
@@ -19,9 +22,14 @@ public class ReportAdapter extends ArrayAdapter<Object> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.report_card, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.text);
+        TextView left = (TextView) rowView.findViewById(R.id.left);
+        TextView right = (TextView) rowView.findViewById(R.id.right);
         Object obj = getItem(position);
-        textView.setText(obj.toString());
+        String text = "";
+        if (obj instanceof HarvestObject) text+= getContext().getResources().getString(R.string.harvest);
+        if (obj instanceof InspectionObject) text+= getContext().getResources().getString(R.string.inspection);
+        left.setText(text);
+        right.setText("                                     A few minutes ago");
         return rowView;
     }
 }
