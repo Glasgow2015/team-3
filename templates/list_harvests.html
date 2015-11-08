@@ -1,6 +1,42 @@
-Apiary: {{ parent.name }}
+<!-- Apiary: {{ parent.name }}
 <ul>
 {% for datum in data %} 
  <li>Harvests of {{ datum.number }} tings m8 | {{ datum }}</li>
 {% endfor %}
 </ul>
+-->
+{% extends "base.html" %}
+{% block title %}Harvest{% endblock %}
+{% block content %}
+<div class="heading jumbotron">
+  <h1>{{ parent.name }}</h1>
+  <div class="btn-group actions" role="group">
+    <a href="/new_harvest/{{ parent.id }}" class="btn">Create new Harvest</a>
+  </div>
+</div>
+<ul class="list-group">
+  {% for datum in data %}
+  <li class="list-item bg-primary">
+    <div class="media apiary">
+      <div class="media-left">
+        <img class="media-object" src="/static/glass.png" alt="...">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">Harvest {{ datum.number }}</h4>
+        <a class="pull-left" href="/view_harvest/{{ datum.number }}">Inspections</a>
+        <h4 class="media-heading">Harvest {{ datum.number }}</h4>
+        <a class="pull-left" href="/view_harvest/{{ datum.number }}">Inspections</a>
+        <h4 class="media-heading">Harvest {{ datum.number }}</h4>
+        <a class="pull-left" href="/view_harvest/{{ datum.number }}">Inspections</a>
+      </div>
+      <div class="media-right">
+        <a href="/delete_harvest/{{ parent.id }}/{{ datum.id }}"><button type="button" class="btn btn-danger">Delete</button></a>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+<!--
+u'apiary_id': u'd4007c47-8c04-43e4-b7d4-a3e08f2849c7', u'smoker_available': True, u'beekeeper_clothing': True, u'assistant_clothing': False, u'harvest_date': u'14000000', u'clean_airtight_buckets_available_number': 8, u'id': u'9b3e830d-4669-4d6b-9f66-18fd118c8193', u'quantity': 2} -->

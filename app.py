@@ -222,6 +222,7 @@ def new_apiary():
     return render_template("new_apiary.html", form=form)
 
 @app.route('/')
+@app.route('/list_apiaries')
 def list_apiaries():
     apiaries = r.table('apiaries').run(g.rdb_conn)
     return render_template("list_apiaries.html", data=apiaries)
@@ -308,6 +309,8 @@ def twilio_response():
         elif endpoint.strip() == "add_harvest":
             try:
                 harvest_dict = protocol.harvest_from_twilio(message_body)
+                apiary = list(r.table('apiaries').limit(1).run(g.rdb_conn))[0][u'id']
+                harvest_dict['apiary_id'] = apiary
                 r.table('harvests').insert(harvest_dict).run(g.rdb_conn)
                 resp.message("OK")
             except Exception as ex:
