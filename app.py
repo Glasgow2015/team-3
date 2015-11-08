@@ -10,6 +10,9 @@ import protocol
 import time
 from rethinkdb.errors import RqlRuntimeError
 
+DB_URI = os.getenv('RETHINKDB_URL', "rethinkdb://localhost:28015")
+DB_HOST, DB_PORT = DB_URI.split('//')[1].split(':')
+
 # Functions
 def pretty_date(time=False):
     """
@@ -182,7 +185,7 @@ DB = "dbase"
 
 # db setup; only run once
 def dbSetup():
-    connection = r.connect(host="localhost", port=28015)
+    connection = r.connect(DB_HOST, DB_PORT)
     try:
         r.db_create(DB).run(connection)
         r.db(DB).table_create('inspections').run(connection)
@@ -199,7 +202,7 @@ dbSetup()
 @app.before_request
 def before_request():
     try:
-        g.rdb_conn = r.connect(host="localhost", port=28015, db=DB)
+        g.rdb_conn = r.connect(DB_HOST, DB_PORT)
     except RqlDriverError:
         abort(503, "Database connection could be established.")
 
