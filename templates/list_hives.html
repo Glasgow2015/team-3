@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Apiary{% endblock %}
+{% block content %}
+<div class="heading jumbotron">
+  <h1>{{ parent.name }}</h1>
+  <div class="btn-group actions" role="group">
+    <button type="button" class="btn btn-danger">Delete</button>
+    <a href="/new_hive/{{ parent.id }}" class="btn">Create</a>
+  </div>
+</div>
+<ul class="list-group">
+  {% for datum in data %}
+  <li class="list-item bg-primary">
+    <div class="media apiary">
+      <div class="media-left">
+        <img class="media-object" src="hex.png" alt="...">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">Hive {{ datum.number }}</h4>
+        <p class="pull-right">Last checked wow fucking get it together</p>
+        <a class="pull-left" href="/list_inspections/{{ datum.number }}">Inspections</a>
+      </div>
+      <div class="media-right">
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

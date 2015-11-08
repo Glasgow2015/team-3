@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}New Inspection{% endblock %}
+{% block content %}
+{% macro render_field(field) %}
+  <dt>{{ field.label }}
+  <dd>{{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}
+
+<form method=post>
+  <dl>
+    {{ render_field(form.weather_conditions) }}
+    {{ render_field(form.state_of_hive) }}
+    {{ render_field(form.strength_of_colony) }}
+    {{ render_field(form.temper_of_hive) }}
+    {{ render_field(form.queen_cells) }}
+    {{ render_field(form.conditions_of_honey_stores) }}
+    {{ render_field(form.conditions_of_pollen_stores) }}
+    {{ render_field(form.small_hive_beetle) }}
+    {{ render_field(form.varrao_mites) }}
+    {{ render_field(form.safari_ants) }}
+    {{ render_field(form.chalk_brood) }}
+    {{ render_field(form.hive_condition) }}
+    {{ render_field(form.protective_clothing_condition) }}
+
+  </dl>
+  <p><input type=submit value=Register>
+</form>
+{% endblock %}
