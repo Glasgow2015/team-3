@@ -286,7 +286,7 @@ def new_inspection(hiveid):
     form = NewInspectionForm(request.form)
     if request.method == "POST" and form.validate():
         data = form.data
-        data['hive'] = hiveid
+        data['hive'] = str(hiveid)
         data['date_of_inspection'] = time.time()
         r.table('inspections').insert(data).run(g.rdb_conn)
         return redirect("/", code=302) 

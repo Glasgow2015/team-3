@@ -51,7 +51,7 @@ def inspection_from_twilio(input):
         raise Exception("clothing_tools_condition ({}) not valid".format(elements[14].strip().lower()))
 
     return {
-        "hive": int(elements[0].strip()),
+        "hive": elements[0].strip(),
         "date_of_inspection": float(elements[1].strip()),
         "weather_conditions": elements[2].strip().lower(),
         "state_of_hive": elements[3].strip().lower(),
