@@ -12,6 +12,7 @@ public class StorageManager {
     private static SharedPreferences prefs = null;
 
     private static String HARVEST_DATA_KEY = "harvest";
+    private static String INSPECTION_DATA_KEY = "inspection";
 
     public static void init(Context context) {
         // Restore preferences
@@ -19,15 +20,29 @@ public class StorageManager {
     }
 
 
-    public static int addRecordToStorage(HarvestObject record) {
+    public static int addRecordToStorage(Object record) {
+        String key;
+
+        if (record instanceof HarvestObject) {
+            key = HARVEST_DATA_KEY;
+
+        } else if (record instanceof InspectionObject) {
+            key = INSPECTION_DATA_KEY;
+
+        } else {
+            // Error occurred.
+            System.err.println("addRecordToStorage: Error occurred, record wrong type.");
+            return 1;
+        }
+
         // Serialize record.
-        String oldString = prefs.getString(HARVEST_DATA_KEY, "");
+        String oldString = prefs.getString(key, "");
         if (oldString.length() != 0) {
             oldString += "\n";
         }
         oldString += record.toString();
 
-        prefs.edit().putString(HARVEST_DATA_KEY, oldString).apply();
+        prefs.edit().putString(key, oldString).apply();
         return 0;
     }
 
