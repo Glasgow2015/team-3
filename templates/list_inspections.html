@@ -2,10 +2,10 @@
 {% block title %}Hive{% endblock %}
 {% block content %}
 <div class="heading jumbotron">
-  <h1>Hive {{ parent.id }}</h1>
+  <h1>Hive {{ hivenum }}</h1>
   <div class="btn-group actions" role="group">
     <!-- <button type="button" class="btn btn-danger">Danger</button> -->
-    <a href="/new_inspection/{{ parent.id }}" type="button" class="btn">Create</button>
+    <a href="/new_inspection/{{ hivenum }}" type="button" class="btn">Create</button>
   </div>
 </div>
 <ul class="timeline">
@@ -14,8 +14,9 @@
     <div class="timeline-badge ok"><i class="glyphicon glyphicon-ok"></i></div>
     <div class="timeline-panel">
       <div class="timeline-heading">
-        <h4 class="timeline-title">{{ datum }}</h4>
-        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>11 hours ago</small></p>
+        <h4 class="timeline-title">Inspection of #{{ hivenum }}</h4>
+        <p>The hive was found in {{ datum.hive_condition }} condition during {{ datum.weather_conditions }} weather. <br> The bees were {{ datum.temper_of_hive }}.</p>
+        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{ datum.pretty_date }}</small></p>
       </div>
       <div class="timeline-body">
       </div>

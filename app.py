@@ -10,6 +10,51 @@ import protocol
 import time
 from rethinkdb.errors import RqlRuntimeError
 
+# Functions
+def pretty_date(time=False):
+    """
+    Get a datetime object or a int() Epoch timestamp and return a
+    pretty string like 'an hour ago', 'Yesterday', '3 months ago',
+    'just now', etc
+    """
+    from datetime import datetime
+    now = datetime.now()
+    if type(time) is int:
+        diff = now - datetime.fromtimestamp(time)
+    elif isinstance(time,datetime):
+        diff = now - time
+    elif not time:
+        diff = now - now
+    second_diff = diff.seconds
+    day_diff = diff.days
+
+    if day_diff < 0:
+        return ''
+
+    if day_diff == 0:
+        if second_diff < 10:
+            return "just now"
+        if second_diff < 60:
+            return str(second_diff) + " seconds ago"
+        if second_diff < 120:
+            return "a minute ago"
+        if second_diff < 3600:
+            return str(second_diff / 60) + " minutes ago"
+        if second_diff < 7200:
+            return "an hour ago"
+        if second_diff < 86400:
+            return str(second_diff / 3600) + " hours ago"
+    if day_diff == 1:
+        return "Yesterday"
+    if day_diff < 7:
+        return str(day_diff) + " days ago"
+    if day_diff < 31:
+        return str(day_diff / 7) + " weeks ago"
+    if day_diff < 365:
+        return str(day_diff / 30) + " months ago"
+    return str(day_diff / 365) + " years ago"
+
+
 # Forms
 class NewApiaryForm(Form):
     name = TextField('Name', [validators.Required()])
@@ -178,6 +223,16 @@ def list_apiaries():
     apiaries = r.table('apiaries').run(g.rdb_conn)
     return render_template("list_apiaries.html", data=apiaries)
 
+@app.route('/delete_apiary/<string:id>')
+def delete_apiary(id):
+    r.table('apiaries').get(id).delete().run(g.rdb_conn)
+    return redirect('/', code=302)
+
+@app.route('/delete_hive/<string:parentid>/<string:id>')
+def delete_hive(parentid, id):
+    r.table('hives').get(id).delete().run(g.rdb_conn)
+    return redirect('/list_hives/{}'.format(parentid), code=302)
+
 @app.route('/list_hives/<string:apiaryid>')
 def list_hives(apiaryid):
     apiary = r.table('apiaries').get(apiaryid).run(g.rdb_conn)
@@ -193,7 +248,12 @@ def list_harvests(apiaryid):
 @app.route('/list_inspections/<string:hivenum>')
 def list_inspections(hivenum):
     inspections = r.table('inspections').filter({"hive":hivenum}).run(g.rdb_conn)
-    return render_template("list_inspections.html", data=inspections)
+    new_inspections = []
+    for inspection in inspections:
+        pretty = pretty_date(int(inspection["date_of_inspection"]))
+        inspection["pretty_date"] = pretty
+        new_inspections.append(inspection)
+    return render_template("list_inspections.html", data=new_inspections, hivenum=hivenum)
 
 @app.route('/new_hive/<string:apiaryid>', methods=["GET", "POST"])
 def new_hive(apiaryid):
@@ -203,7 +263,7 @@ def new_hive(apiaryid):
         data['apiary_id'] = apiaryid
         data['date_of_installation'] = time.time()
         r.table('hives').insert(data).run(g.rdb_conn)
-        return redirect("/list_apiaries", code=302) 
+        return redirect("/list_hives/{}".format(apiaryid), code=302) 
     return render_template("new_hive.html", alert="LOL", form=form)
 
 @app.route('/new_harvest/<string:apiaryid>', methods=["GET", "POST"])
@@ -214,7 +274,7 @@ def new_harvest(apiaryid):
         data['apiary_id'] = apiaryid
         data['harvest_date'] = time.time()
         r.table('harvests').insert(data).run(g.rdb_conn)
-        return redirect("/list_apiaries", code=302) 
+        return redirect("/", code=302) 
     return render_template("new_harvest.html", alert="LOL", form=form)
 
 @app.route('/new_inspection/<string:hiveid>', methods=["GET", "POST"])
@@ -226,7 +286,7 @@ def new_inspection(hiveid):
         data['hive'] = hive['number']
         data['date_of_inspection'] = time.time()
         r.table('inspections').insert(data).run(g.rdb_conn)
-        return redirect("/list_apiaries", code=302) 
+        return redirect("/", code=302) 
     return render_template("new_inspection.html", alert="LOL", form=form)
 
 @app.route("/twilio", methods=['GET','POST'])
