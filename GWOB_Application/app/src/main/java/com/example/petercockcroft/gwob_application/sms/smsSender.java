@@ -7,7 +7,7 @@ import android.telephony.SmsManager;
  */
 public class smsSender {
     public static void sendSms(String message){
-        String phoneNumber = "9999999999";
+        String phoneNumber = "00441330202027";
         String smsBody = message;
 
         // Get the default instance of SmsManager
