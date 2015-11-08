@@ -1,6 +1,6 @@
 <a href="/new_apiary">Create New</a>
 <ul>
 {% for datum in data %} 
- <li>{{ datum.name }} | <a href="/list_hives/{{ datum.id }}">Hives</a> | <a href="/new_hive/{{ datum.id }}">New Hive</a> </li> 
+ <li>{{ datum.name }} | <a href="/list_hives/{{ datum.id }}">Hives</a> | <a href="/new_hive/{{ datum.id }}">New Hive</a> </li> | <a href="/list_harvests/{{ datum.id }}">Harvests</a> | <a href="/new_harvest/{{ datum.id }}">New Harvest</a>
 {% endfor %}
 </ul>

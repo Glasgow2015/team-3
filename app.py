@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, jsonify, render_template, g, url_for
 from wtforms import Form, TextField, FloatField, SelectMultipleField, \
-                    FileField, RadioField, BooleanField, validators
+                    FileField, RadioField, BooleanField, IntegerField, validators
 from wtforms.ext.dateutil.fields import DateTimeField
 import twilio.twiml
 import rethinkdb as r
@@ -125,6 +125,13 @@ class NewInspectionForm(Form):
         ('damaged','Damaged')
     ])
 
+class NewHarvestForm(Form):
+    quantity = IntegerField('Number of Ripe Combs Harvested', [validators.Required()])
+    beekeeper_clothing = BooleanField('Protective Clothing Available for Beekeeper', [])
+    assistant_clothing = BooleanField('Protective Clothing Available all Assistants', [])
+    smoker_available = BooleanField('Smoker Available', [])
+    clean_airtight_buckets_available_number = IntegerField('Number of Clean, Airtight Buckets Available for Harvest', [validators.Required()])
+
 app = Flask(__name__)
 DB = "dbase"
 
@@ -181,6 +188,12 @@ def list_hives(apiaryid):
     hives = r.table('hives').filter({"apiary_id":apiaryid}).run(g.rdb_conn)
     return render_template("list_hives.html", parent=apiary, data=hives)
 
+@app.route('/list_harvests/<string:apiaryid>')
+def list_harvests(apiaryid):
+    apiary = r.table('apiaries').get(apiaryid).run(g.rdb_conn)
+    hives = r.table('harvests').filter({"apiary_id":apiaryid}).run(g.rdb_conn)
+    return render_template("list_harvests.html", parent=apiary, data=hives)
+
 @app.route('/list_inspections/<string:hivenum>')
 def list_inspections(hivenum):
     inspections = r.table('inspections').filter({"hive":hivenum}).run(g.rdb_conn)
@@ -196,6 +209,17 @@ def new_hive(apiaryid):
         r.table('hives').insert(data).run(g.rdb_conn)
         return redirect("/list_apiaries", code=302) 
     return render_template("new_hive.html", alert="LOL", form=form)
+
+@app.route('/new_harvest/<string:apiaryid>', methods=["GET", "POST"])
+def new_harvest(apiaryid):
+    form = NewHarvestForm(request.form)
+    if request.method == "POST" and form.validate():
+        data = form.data
+        data['apiary_id'] = apiaryid
+        data['harvest_date'] = time.time()
+        r.table('harvests').insert(data).run(g.rdb_conn)
+        return redirect("/list_apiaries", code=302) 
+    return render_template("new_harvest.html", alert="LOL", form=form)
 
 @app.route('/new_inspection/<string:hiveid>', methods=["GET", "POST"])
 def new_inspection(hiveid):
