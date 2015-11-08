@@ -1,10 +1,13 @@
-from flask import Flask, request, redirect, jsonify, render_template, g
-from wtforms import Form, TextField, FloatField, SelectMultipleField, FileField, DateTimeField, RadioField, validators
+from flask import Flask, request, redirect, jsonify, render_template, g, url_for
+from wtforms import Form, TextField, FloatField, SelectMultipleField, \
+                    FileField, RadioField, BooleanField, validators
+from wtforms.ext.dateutil.fields import DateTimeField
 import twilio.twiml
 import rethinkdb as r
 import json
 import os
 import protocol
+import time
 from rethinkdb.errors import RqlRuntimeError
 
 # Forms
@@ -39,9 +42,7 @@ class NewHiveForm(Form):
     number = TextField('Number', [validators.Required()])
     lat = FloatField('Latitude', [validators.Required()])
     lon = FloatField('Longitude', [validators.Required()])
-    image = FileField('Image', [validators.Required()])
-    date_of_installation = DateTimeField('Date of Installation', [validators.Required()], \
-        format='%Y-%m-%d %H:%M:%S')
+    image = FileField('Image', [])
     hive_type = RadioField('Hive Type', choices=[ \
         ('traditional_hive','Traditional Hive'), \
         ('top_bar_hive','Top Bar Hive'), \
@@ -53,6 +54,75 @@ class NewHiveForm(Form):
         ('shady','Shady'), \
         ('partial_shade','Partial Shade'), \
         ('sunny','Sunny') \
+    ])
+
+class NewInspectionForm(Form):
+    weather_conditions = RadioField('Weather Conditions', choices=[ \
+        ('sunny','Sunny'), \
+        ('partly_cloudy','Partly Cloudy'), \
+        ('cloudy','Cloudy'), \
+        ('rain','Rain'), \
+        ('windy','Windy') 
+    ])
+    state_of_hive = RadioField('State of Hive', choices=[ \
+        ('not_in_use','Not in use/not installed'), \
+        ('not_yet_occupied','Not yet occupied'), \
+        ('occupied','Occupied'), \
+        ('absconed','Absconed'), \
+        ('robbed','Dead, because of robbing'), \
+        ('honey_badger','Dead, because of honey badger'), \
+        ('mites','Dead, because of mites'), \
+        ('beetle','Dead, because of beetle'), \
+        ('ants','Dead, because of ants or other insects'), \
+        ('fire','Dead, because of fire'), \
+        ('flood','Dead, because of flood'), \
+        ('unknown','Dead, because of unknown')
+    ])
+    strength_of_colony = RadioField('Strength of the Colony', choices=[ \
+        ('strong','Strong'), \
+        ('moderate','Moderate'), \
+        ('weak','Weak'), \
+        ('critical','Critical')
+    ])    
+    temper_of_hive = RadioField('Temper of the Hive', choices=[ \
+        ('calm','Calm'), \
+        ('nervous','Nervous'), \
+        ('angry','Angry')
+    ])
+    queen_cells = BooleanField('Queen cells in brood cells', [])
+    conditions_of_honey_stores = RadioField('Conditions of Honey Stores', choices=[ \
+        ('high','High'), \
+        ('average','Average'), \
+        ('low','Low') \
+    ])
+    conditions_of_pollen_stores = RadioField('Conditions of Pollen Stores', choices=[ \
+        ('high','High'), \
+        ('average','Average'), \
+        ('low','Low')
+    ])
+    small_hive_beetle = RadioField('Pests: Small Hive Beetle', choices=[ \
+        ('light','Light'), \
+        ('moderate','Moderate'), \
+        ('heavy','Heavy')
+    ])
+    varrao_mites = RadioField('Pests: Varrao Mites', choices=[ \
+        ('light','Light'), \
+        ('moderate','Moderate'), \
+        ('heavy','Heavy')
+    ])
+    safari_ants = BooleanField('Pests: Safari Ants', [])
+    chalk_brood = BooleanField('Diseases: Chalk Brood', [])
+    hive_condition = RadioField('Hive Condition', choices=[ \
+        ('good','Good'), \
+        ('fair','Fair'), \
+        ('poor','Poor'), \
+        ('damaged','Damaged')
+    ])
+    protective_clothing_condition = RadioField('Protective Clothing and Beekeeping Tools Condition', choices=[ \
+        ('good','Good'), \
+        ('fair','Fair'), \
+        ('poor','Poor'), \
+        ('damaged','Damaged')
     ])
 
 app = Flask(__name__)
@@ -96,17 +166,48 @@ def hello():
 def new_apiary():
     form = NewApiaryForm(request.form)
     if request.method == "POST" and form.validate():
-        flash('Apiary Created')
-        return render_template("new_apiary.html", form=form) 
+        r.table('apiaries').insert(form.data).run(g.rdb_conn)
+        return redirect("/list_apiaries", code=302) 
     return render_template("new_apiary.html", alert="LOL", form=form)
 
-@app.route('/new_hive/<int:apiaryid>', methods=["GET", "POST"])
+@app.route('/list_apiaries')
+def list_apiaries():
+    apiaries = r.table('apiaries').run(g.rdb_conn)
+    return render_template("list_apiaries.html", data=apiaries)
+
+@app.route('/list_hives/<string:apiaryid>')
+def list_hives(apiaryid):
+    apiary = r.table('apiaries').get(apiaryid).run(g.rdb_conn)
+    hives = r.table('hives').filter({"apiary_id":apiaryid}).run(g.rdb_conn)
+    return render_template("list_hives.html", parent=apiary, data=hives)
+
+@app.route('/list_inspections/<string:hivenum>')
+def list_inspections(hivenum):
+    inspections = r.table('inspections').filter({"hive":hivenum}).run(g.rdb_conn)
+    return render_template("list_inspections.html", data=inspections)
+
+@app.route('/new_hive/<string:apiaryid>', methods=["GET", "POST"])
 def new_hive(apiaryid):
     form = NewHiveForm(request.form)
     if request.method == "POST" and form.validate():
-        flash('Hive Created')
-        return render_template("new_hive.html", form=form) 
+        data = form.data
+        data['apiary_id'] = apiaryid
+        data['date_of_installation'] = time.time()
+        r.table('hives').insert(data).run(g.rdb_conn)
+        return redirect("/list_apiaries", code=302) 
     return render_template("new_hive.html", alert="LOL", form=form)
+
+@app.route('/new_inspection/<string:hiveid>', methods=["GET", "POST"])
+def new_inspection(hiveid):
+    form = NewInspectionForm(request.form)
+    if request.method == "POST" and form.validate():
+        data = form.data
+        hive = r.table('hives').get(hiveid).run(g.rdb_conn)
+        data['hive'] = hive['number']
+        data['date_of_inspection'] = time.time()
+        r.table('inspections').insert(data).run(g.rdb_conn)
+        return redirect("/list_apiaries", code=302) 
+    return render_template("new_inspection.html", alert="LOL", form=form)
 
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():

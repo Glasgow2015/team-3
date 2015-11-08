@@ -1,3 +1,6 @@
+import time
+import datetime
+
 def harvest_from_twilio(input):
     elements = input.split('|')
     return {
@@ -48,21 +51,21 @@ def inspection_from_twilio(input):
         raise Exception("clothing_tools_condition ({}) not valid".format(elements[14].strip().lower()))
 
     return {
-        "hive": int(elements[0].strip()),
-        "inspection_date": elements[1].strip(),
-        "weather_condition": elements[2].strip().lower(),
-        "hive_state": elements[3].strip().lower(),
-        "colony_strength": elements[4].strip().lower(),
-        "hive_temper": elements[5].strip().lower(),
-        "queen": elements[6].strip().lower() == "yes",
-        "honey_store_condition": elements[7].strip().lower(),
-        "pollen_store_condition": elements[8].strip().lower(),
+        "hive_number": int(elements[0].strip()),
+        "date_of_inspection": float(elements[1].strip()),
+        "weather_conditions": elements[2].strip().lower(),
+        "state_of_hive": elements[3].strip().lower(),
+        "strength_of_colony": elements[4].strip().lower(),
+        "temper_of_hive": elements[5].strip().lower(),
+        "queen_cells": elements[6].strip().lower() == "yes",
+        "conditions_of_honey_stores": elements[7].strip().lower(),
+        "conditions_of_pollen_stores": elements[8].strip().lower(),
         "small_hive_beetle": elements[9].strip().lower(),
         "varrao_mites": elements[10].strip().lower(),
         "safari_ants": elements[11].strip().lower() == "yes",
         "chalk_brood": elements[12].strip().lower() == "yes",
         "hive_condition": elements[13].strip().lower(),
-        "clothing_tools_condition": elements[14].strip().lower()
+        "protective_clothing_condition": elements[14].strip().lower()
     }
 def harvest_to_twilio (input):
     return "|".join("{}" * 6).format(
