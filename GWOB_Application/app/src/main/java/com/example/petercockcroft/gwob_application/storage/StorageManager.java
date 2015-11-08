@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.telephony.SmsManager;
 
+import com.example.petercockcroft.gwob_application.sms.smsSender;
+
 /**
  * Created by robin on 07/11/15.
  */
@@ -25,9 +27,13 @@ public class StorageManager {
 
         if (record instanceof HarvestObject) {
             key = HARVEST_DATA_KEY;
+            smsSender.sendSms("_harvest|" + record.toString());
+            return 0;
 
         } else if (record instanceof InspectionObject) {
             key = INSPECTION_DATA_KEY;
+            smsSender.sendSms("_inspection|" + record.toString());
+            return 0;
 
         } else {
             // Error occurred.
@@ -36,14 +42,14 @@ public class StorageManager {
         }
 
         // Serialize record.
-        String oldString = prefs.getString(key, "");
-        if (oldString.length() != 0) {
-            oldString += "\n";
-        }
-        oldString += record.toString();
-
-        prefs.edit().putString(key, oldString).apply();
-        return 0;
+//        String oldString = prefs.getString(key, "");
+//        if (oldString.length() != 0) {
+//            oldString += "\n";
+//        }
+//        oldString += record.toString();
+//
+//        prefs.edit().putString(key, oldString).apply();
+//        return 0;
     }
 
 
