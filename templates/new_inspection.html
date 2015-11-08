@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}New Inspection{% endblock %}
+{% block content %}
 {% macro render_field(field) %}
   <dt>{{ field.label }}
   <dd>{{ field(**kwargs)|safe }}
@@ -30,3 +33,4 @@
   </dl>
   <p><input type=submit value=Register>
 </form>
+{% endblock %}

@@ -165,10 +165,6 @@ def teardown_request(exception):
     except AttributeError:
         pass
 
-@app.route('/', methods=["GET"])
-def hello():
-    return render_template("index.html") 
-
 @app.route('/new_apiary', methods=["GET", "POST"])
 def new_apiary():
     form = NewApiaryForm(request.form)
@@ -177,7 +173,7 @@ def new_apiary():
         return redirect("/list_apiaries", code=302) 
     return render_template("new_apiary.html", alert="LOL", form=form)
 
-@app.route('/list_apiaries')
+@app.route('/')
 def list_apiaries():
     apiaries = r.table('apiaries').run(g.rdb_conn)
     return render_template("list_apiaries.html", data=apiaries)

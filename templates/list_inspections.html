@@ -1,5 +1,36 @@
-<ul>
-{% for datum in data %} 
- <li>Inspection: {{ datum }}</li>
-{% endfor %}
+{% extends "base.html" %}
+{% block title %}Hive{% endblock %}
+{% block content %}
+<div class="heading jumbotron">
+  <h1>Hive {{ parent.id }}</h1>
+  <div class="btn-group actions" role="group">
+    <!-- <button type="button" class="btn btn-danger">Danger</button> -->
+    <a href="/new_inspection/{{ parent.id }}" type="button" class="btn">Create</button>
+  </div>
+</div>
+<ul class="timeline">
+  {% for datum in data %}
+  <li>
+    <div class="timeline-badge ok"><i class="glyphicon glyphicon-ok"></i></div>
+    <div class="timeline-panel">
+      <div class="timeline-heading">
+        <h4 class="timeline-title">{{ datum }}</h4>
+        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>11 hours ago</small></p>
+      </div>
+      <div class="timeline-body">
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+  <!-- <li class="timeline-inverted">
+    <div class="timeline-badge bad"><i class="glyphicon glyphicon-remove"></i></div>
+    <div class="timeline-panel">
+      <div class="timeline-heading">
+        <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+      </div>
+      <div class="timeline-body">
+      </div>
+    </div>
+  </li> -->
 </ul>
+{% endblock %}
