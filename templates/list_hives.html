@@ -23,6 +23,81 @@
       </div>
     </div>
   </li>
+
   {% endfor %}
+<style>
+      #map {
+        height: 300px;
+        width: 100%;
+      }
+</style>
+  <li class="list-item bg-primary">
+    <div class="media apiary">
+      <div class="media-left">
+      </div>
+      <div class="media-body">
+    <div id="map"></div>
+      </div>
+    </div>
+  </li>
+
+     <script>
+
+// If you're adding a number of markers, you may want to drop them on the map
+// consecutively rather than all at once. This example shows how to use
+// window.setTimeout() to space your markers' animation.
+
+var neighborhoods = [
+{% for datum in data %}
+  {lat: {{ datum.lat }}, lng: {{ datum.lon }}},
+{% endfor %}
+];
+
+var markers = [];
+var map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 3,
+    center: {lat: -6.3994428, lng:35.6975943}
+  });
+}
+
+function drop() {
+  clearMarkers();
+  for (var i = 0; i < neighborhoods.length; i++) {
+    addMarkerWithTimeout(neighborhoods[i], i * 200);
+  }
+}
+
+function addMarkerWithTimeout(position, timeout) {
+  window.setTimeout(function() {
+    markers.push(new google.maps.Marker({
+      position: position,
+      map: map,
+      animation: google.maps.Animation.DROP
+    }));
+  }, timeout);
+}
+
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+}
+
+
+
+
+
+  
+
+
+setTimeout(drop, 1000);
+
+    </script>
+ <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiOOnpOcxL99py1NVuM4kcQ8zQFW9pqbM&signed_in=true&callback=initMap"></script>
 </ul>
 {% endblock %}
