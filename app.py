@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, jsonify, render_template, g
-from wtforms import Form, TextField, FloatField, SelectMultipleField, validators
+from wtforms import Form, TextField, FloatField, SelectMultipleField, FileField, DateTimeField, RadioField, validators
 import twilio.twiml
 import rethinkdb as r
 import json
@@ -33,6 +33,26 @@ class NewApiaryForm(Form):
         ('breast_height','Breast Height'), \
         ('bee_house','Bee Height'), \
         ('honey_badger_stand','Honey Badger Stand'), \
+    ])
+
+class NewHiveForm(Form):
+    number = TextField('Number', [validators.Required()])
+    lat = FloatField('Latitude', [validators.Required()])
+    lon = FloatField('Longitude', [validators.Required()])
+    image = FileField('Image', [validators.Required()])
+    date_of_installation = DateTimeField('Date of Installation', [validators.Required()], \
+        format='%Y-%m-%d %H:%M:%S')
+    hive_type = RadioField('Hive Type', choices=[ \
+        ('traditional_hive','Traditional Hive'), \
+        ('top_bar_hive','Top Bar Hive'), \
+        ('top_bar_hive_with_queen_excluder','Top Bar Hive With Queen Excluder'), \
+        ('langstroth_hive','Langstroth Hive'), \
+        ('other','Other') \
+    ])
+    sun_exposure = RadioField('Sun Exposure', choices=[ \
+        ('shady','Shady'), \
+        ('partial_shade','Partial Shade'), \
+        ('sunny','Sunny') \
     ])
 
 app = Flask(__name__)
@@ -79,6 +99,14 @@ def new_apiary():
         flash('Apiary Created')
         return render_template("new_apiary.html", form=form) 
     return render_template("new_apiary.html", alert="LOL", form=form)
+
+@app.route('/new_hive/<int:apiaryid>', methods=["GET", "POST"])
+def new_hive(apiaryid):
+    form = NewHiveForm(request.form)
+    if request.method == "POST" and form.validate():
+        flash('Hive Created')
+        return render_template("new_hive.html", form=form) 
+    return render_template("new_hive.html", alert="LOL", form=form)
 
 @app.route("/twilio", methods=['GET','POST'])
 def twilio_response():
