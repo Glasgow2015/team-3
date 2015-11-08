@@ -3,12 +3,15 @@ package com.example.petercockcroft.gwob_application;
 /**
  * Created by petercockcroft on 07/11/15.
  */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.petercockcroft.gwob_application.storage.InspectionObject;
+import com.example.petercockcroft.gwob_application.storage.StorageManager;
 import com.heinrichreimersoftware.singleinputform.SingleInputFormActivity;
 import com.heinrichreimersoftware.singleinputform.steps.CheckBoxStep;
 import com.heinrichreimersoftware.singleinputform.steps.DateStep;
@@ -40,15 +43,15 @@ public class InspectionForm extends SingleInputFormActivity {
     private static final String DATA_KEY_QUEEN_CELLS = "queen cells";
     private static final String DATA_KEY_HONEY_STORES = "honey stores";
     private static final String DATA_KEY_POLLEN_STORES = "pollen stores";
-    private static final String DATA_KEY_HIVE_BEETLE= "hive beetle";
+    private static final String DATA_KEY_HIVE_BEETLE = "hive beetle";
     private static final String DATA_KEY_VARRAO_MITES = "varrao mites";
     private static final String DATA_KEY_SAFARI_ANTS = "safari ants";
     private static final String DATA_KEY_CHALK_BROOD = "chalk brood";
     private static final String DATA_KEY_HIVE_CONDITION = "hive condition";
-    private static final String DATA_KEY_CLOTHING_CONDITION= "clothing tools condition";
+    private static final String DATA_KEY_CLOTHING_CONDITION = "clothing tools condition";
 
     @Override
-    protected List<Step> getSteps(Context context){
+    protected List<Step> getSteps(Context context) {
         List<Step> steps = new ArrayList<Step>();
         steps.add(
                 new TextStep(context, DATA_KEY_HIVE_NUMBER,
@@ -62,9 +65,9 @@ public class InspectionForm extends SingleInputFormActivity {
                                 int result;
                                 try {
                                     result = Integer.parseInt(input);
-                                } catch(NumberFormatException e) {
+                                } catch (NumberFormatException e) {
                                     return false;
-                                } catch(NullPointerException e) {
+                                } catch (NullPointerException e) {
                                     return false;
                                 }
                                 // Check if positive.
@@ -105,7 +108,7 @@ public class InspectionForm extends SingleInputFormActivity {
         );
 
         steps.add(
-                new OptionStep(context, DATA_KEY_STATE_OF_HIVE ,
+                new OptionStep(context, DATA_KEY_STATE_OF_HIVE,
                         new String[]{
                                 "Not in use",
                                 "Not yet occupied",
@@ -220,8 +223,8 @@ public class InspectionForm extends SingleInputFormActivity {
         steps.add(
                 new OptionStep(context, DATA_KEY_SAFARI_ANTS,
                         new String[]{
-                            getResources().getString(R.string.boolean_positive),
-                            getResources().getString(R.string.boolean_negative)
+                                getResources().getString(R.string.boolean_positive),
+                                getResources().getString(R.string.boolean_negative)
                         },
                         R.string.safari_ants,
                         R.string.safari_ants_error,
@@ -244,10 +247,10 @@ public class InspectionForm extends SingleInputFormActivity {
         steps.add(
                 new OptionStep(context, DATA_KEY_HIVE_CONDITION,
                         new String[]{
-                            "Good",
-                            "Fair",
-                            "Poor",
-                            "Damaged"
+                                "Good",
+                                "Fair",
+                                "Poor",
+                                "Damaged"
                         },
                         R.string.hive_condition,
                         R.string.hive_condition_error,
@@ -274,15 +277,35 @@ public class InspectionForm extends SingleInputFormActivity {
     }
 
     @Override
-    protected void onFormFinished(Bundle data){
-        Toast.makeText(this, "Form finished: " +
-                        CheckBoxStep.checked(data, DATA_KEY_EULA) + ", " +
-                        TextStep.text(data, DATA_KEY_EMAIL) + ", " +
-                        TextStep.text(data, DATA_KEY_PASSWORD) + ", " +
-                        DateStep.day(data, DATA_KEY_BIRTHDAY) + "." + DateStep.month(data, DATA_KEY_BIRTHDAY) + "." + DateStep.year(data, DATA_KEY_BIRTHDAY) + ", " +
-                        SeekBarStep.progress(data, DATA_KEY_HEIGHT) + ", " +
-                        TextStep.text(data, DATA_KEY_CITY),
-                Toast.LENGTH_LONG).show();
-        Log.d("MainActivity", "data: " + data.toString());
+    protected void onFormFinished(Bundle data) {
+        int hive_number = Integer.parseInt(TextStep.text(data, DATA_KEY_HIVE_NUMBER));
+        Calendar inspection_date = new GregorianCalendar(
+                DateStep.year(data, DATA_KEY_DATE_INSPECTION),
+                DateStep.month(data, DATA_KEY_DATE_INSPECTION),
+                DateStep.day(data, DATA_KEY_DATE_INSPECTION));
+
+        int weather_condition = OptionStep.selectedOption(data, DATA_KEY_WEATHER_CONDITIONS),
+                state_of_hive = OptionStep.selectedOption(data, DATA_KEY_STATE_OF_HIVE),
+                hive_strength = OptionStep.selectedOption(data, DATA_KEY_STRENGTH),
+                hive_temper = OptionStep.selectedOption(data, DATA_KEY_TEMPER),
+                queen_celles = OptionStep.selectedOption(data, DATA_KEY_QUEEN_CELLS),
+                honey_stores = OptionStep.selectedOption(data, DATA_KEY_HONEY_STORES),
+                pollen_stores = OptionStep.selectedOption(data, DATA_KEY_POLLEN_STORES),
+                hive_beetle = OptionStep.selectedOption(data, DATA_KEY_HIVE_BEETLE),
+                varrao_mites = OptionStep.selectedOption(data, DATA_KEY_VARRAO_MITES),
+                safari_ants = OptionStep.selectedOption(data, DATA_KEY_SAFARI_ANTS),
+                chalk_brood = OptionStep.selectedOption(data, DATA_KEY_CHALK_BROOD),
+                hive_cond = OptionStep.selectedOption(data, DATA_KEY_HIVE_CONDITION),
+                cloth_cond = OptionStep.selectedOption(data, DATA_KEY_CLOTHING_CONDITION);
+
+        InspectionObject inspection = new InspectionObject(
+                hive_number, inspection_date, weather_condition,
+                state_of_hive, hive_strength, hive_temper,
+                queen_celles, honey_stores, pollen_stores, hive_beetle, varrao_mites,
+                safari_ants, chalk_brood, hive_cond, cloth_cond
+        );
+
+        // Add inspection to storage.
+        StorageManager.addRecordToStorage(inspection);
     }
 }

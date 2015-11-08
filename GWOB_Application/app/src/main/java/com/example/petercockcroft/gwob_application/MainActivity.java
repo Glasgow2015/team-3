@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.petercockcroft.gwob_application.storage.InspectionManager;
 import com.example.petercockcroft.gwob_application.storage.StorageManager;
 
 public class MainActivity extends AppCompatActivity {
