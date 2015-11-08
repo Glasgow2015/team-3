@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         choiceInspection = findViewById(R.id.choice_one);
-        ((TextView)choiceInspection.findViewById(R.id.choice_name)).setText("Oh yeah bitches! Inspection.");
+        ((TextView)choiceInspection.findViewById(R.id.choice_name)).setText("Inspection");
         ((ImageView)choiceInspection.findViewById(R.id.hexPic)).setImageResource(R.drawable.glass);
         choiceInspection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         choiceHarvest = findViewById(R.id.choice_two);
-        ((TextView)choiceHarvest.findViewById(R.id.choice_name)).setText("Oh yeah bitches! Harvest.");
+        ((TextView)choiceHarvest.findViewById(R.id.choice_name)).setText("Harvest");
         ((ImageView)choiceHarvest.findViewById(R.id.hexPic)).setImageResource(R.drawable.hex);
         choiceHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         choiceReport = findViewById(R.id.choice_three);
         ((ImageView)choiceReport.findViewById(R.id.hexPic)).setImageResource(R.drawable.report);
-        ((TextView)choiceReport.findViewById(R.id.choice_name)).setText("REPOAAARTS");
+        ((TextView)choiceReport.findViewById(R.id.choice_name)).setText("Reports");
         choiceReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

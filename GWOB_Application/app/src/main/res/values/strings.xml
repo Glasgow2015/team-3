@@ -128,7 +128,7 @@
     <!-- MISCELLANEOUS -->
     <string name="boolean_positive">Yes</string>
     <string name="boolean_negative">No</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">hivemind</string>
 
 
 </resources>
