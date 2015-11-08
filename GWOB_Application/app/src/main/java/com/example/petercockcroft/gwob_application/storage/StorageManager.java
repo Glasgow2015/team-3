@@ -2,6 +2,7 @@ package com.example.petercockcroft.gwob_application.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.telephony.SmsManager;
 
 /**
  * Created by robin on 07/11/15.
@@ -29,4 +30,6 @@ public class StorageManager {
         prefs.edit().putString(HARVEST_DATA_KEY, oldString).apply();
         return 0;
     }
+
+
 }
